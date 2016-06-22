@@ -1,5 +1,7 @@
 package br.ufc.model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name="classificado")
 public class Classificado {
@@ -26,16 +30,13 @@ public class Classificado {
 	
 	private String telefone;
 	
-	//@Column(name="melhorOferta_id",	nullable=true)
-	//private Long classificadoId;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date data = new Date();
 	
 	@OneToOne(optional=true)
 	@JoinColumn(name="melhorOferta_id",
 				referencedColumnName="id_oferta")
 	private Oferta melhorOferta;
-	
-	@Column(name="data_oferta")
-	private String data;
 	
 	Boolean ativo = false; 
 	
@@ -69,14 +70,10 @@ public class Classificado {
 		this.melhorOferta = melhorOferta;
 	}
 
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
+	
 	public Long getId() {
 		return id;
 	}

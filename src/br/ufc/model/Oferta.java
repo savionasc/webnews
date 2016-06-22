@@ -66,4 +66,20 @@ public class Oferta {
 	public void setClassificado(Classificado classificado) {
 		this.classificado = classificado;
 	}
+
+	public Date getData() {
+		return data;
+	}
+	
+	public boolean verificavencimento(Date emissao, Date vencimento){
+		boolean data;
+		if (emissao.before(vencimento)){
+			data = true;
+		}
+		else if (emissao.after(vencimento))
+			data = false;
+		else
+			data = true;
+		return data;
+	}
 }

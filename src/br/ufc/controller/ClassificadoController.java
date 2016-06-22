@@ -79,23 +79,31 @@ public class ClassificadoController {
 	
 	@RequestMapping("/fazerOferta")
 	public String fazerOferta(Long idUsuario, Oferta oferta, HttpServletRequest req){
-		Classificado aux = clDAO.recuperar((long) Integer.parseInt(req.getParameter("idClassificado")));
-		
-		Usuario autor = uDAO.recuperar(idUsuario);
-		
-		oferta.setUsuario(autor);
-		oDAO.inserir(oferta);
-		if(aux.getMelhorOferta() != null){
-			if((aux.getMelhorOferta().getId_oferta() < oferta.getPreco()))
+			Classificado aux = clDAO.recuperar((long) Integer.parseInt(req.getParameter("idClassificado")));
+			
+			Usuario autor = uDAO.recuperar(idUsuario);
+			
+			oferta.setUsuario(autor);
+			oDAO.inserir(oferta);
+			if(aux.getMelhorOferta() != null){
+				if((aux.getMelhorOferta().getId_oferta() < oferta.getPreco()))
+					aux.setMelhorOferta(oferta);
+			}else
 				aux.setMelhorOferta(oferta);
-		}else
+			
+			oferta.setClassificado(aux);
+			oDAO.alterar(oferta);
 			aux.setMelhorOferta(oferta);
+			clDAO.alterar(aux);
+			
+			if(oferta.verificavencimento(oferta.getData(), oferta.getClassificado().getData())){
+				System.out.println("ainda da para comprar");
+			}else{
+				System.out.println("Não da para comprar");
+			}
+			return "redirect:listarClassificados";
 		
-		oferta.setClassificado(aux);
-		oDAO.alterar(oferta);
-		aux.setMelhorOferta(oferta);
-		clDAO.alterar(aux);
-		return "redirect:listarClassificados";
+			
 	}
 	@RequestMapping("/listarClassificadosInativos")
 	public String listarClassificadosInativos(Model model){
