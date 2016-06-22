@@ -21,6 +21,10 @@ public class NoticiaDAO{
 		// TODO Auto-generated method stub
 		manager.persist(noticia);
 	}
+	
+	public void alterar(Noticia noticia){
+		manager.merge(noticia);
+	}
 
 	public Noticia recuperar(Long id) {
 		// TODO Auto-generated method stub

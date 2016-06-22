@@ -108,4 +108,19 @@ public class NoticiaController {
 		model.addAttribute("noticias", noticias);
 		return "noticia/listar_noticia";
 	}
+	@RequestMapping("/alterarNoticiaFormulario")
+	public String alterarNoticiaFormulario(Long id, Model model){
+		Noticia noticia = nDAO.recuperarId(id);
+		List<Secao> secoes = sDAO.listar();
+		model.addAttribute("secoes", secoes);
+		model.addAttribute("noticia", noticia);
+		return "noticia/alterar_noticia_formulario";
+	}
+	@RequestMapping("/alterarNoticia")
+	public String alterarNoticia(Noticia noticia, Long seccao, Long idAutor, HttpServletRequest req){
+		noticia.setAutor(uDAO.recuperar(idAutor));
+		noticia.setSecao(sDAO.recuperar(seccao));
+		nDAO.alterar(noticia);
+		return "redirect:listarNoticia";
+	}
 }

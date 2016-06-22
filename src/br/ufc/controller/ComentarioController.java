@@ -70,6 +70,7 @@ public class ComentarioController {
 	@RequestMapping("/listarComentarios")
 	public String listarComentarios(Long id, Model model){
 		Noticia noticia = nDAO.recuperar(id);
+		noticia.setAcesso(noticia.getAcesso()+1);
 		List<Secao> secoes = this.sDAO.listar();
 		model.addAttribute("secoes", secoes);
 		List<Comentario> comentario = cDAO.recuperarComentarios(noticia);

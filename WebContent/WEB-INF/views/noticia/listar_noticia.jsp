@@ -17,7 +17,7 @@ Usuario logado: ${usuario_logado.nome}
 		<td>${n.titulo}</td>
 		<td>${n.texto}</td>
 		<td><img alt="${n.titulo}" src="<c:url value="/resources/images/${n.noticiaId}.png"  />" /></td>
-		<td><a href="alterarUsuarioFormulario?id=${n.noticiaId}">ALTERAR</a></td>
+		<td><a href="alterarNoticiaFormulario?id=${n.noticiaId}">ALTERAR</a></td>
 		<td><a href="inserirComentarioFormulario?id=${n.noticiaId}">COMENTAR</a></td>
 		<td><a href="listarComentarios?id=${n.noticiaId}">Ver Comentarios</a></td>
 		<td><a href="apagarNoticia?id=${n.noticiaId}">APAGAR</a></td>

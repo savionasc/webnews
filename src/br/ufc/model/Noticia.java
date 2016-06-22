@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity(name="noticia")
 public class Noticia {
@@ -20,6 +19,8 @@ public class Noticia {
 	private String titulo;
 	
 	private String texto;
+	
+	private Long acesso = 0l;
 	
 	/*
 	@Column(name="SECAO_ID",
@@ -91,5 +92,15 @@ public class Noticia {
 
 	public void setSecao(Secao secao) {
 		this.secao = secao;
-	}	
+	}
+
+	public Long getAcesso() {
+		return acesso;
+	}
+
+	public void setAcesso(Long acesso) {
+		this.acesso = acesso;
+	}
+	
+	
 }
