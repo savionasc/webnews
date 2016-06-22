@@ -12,8 +12,6 @@
 	<input type="hidden" name="idClassificado" value="${classificado.id}" />
 	<input type="hidden" name="idUsuario" value="${usuario_logado.id}" />
 	preco:<input type="text" name="preco" />
-	<c:if test="">
-	</c:if>	
 	
 	<input type="submit" value="Cadastrar" />
 </form>
