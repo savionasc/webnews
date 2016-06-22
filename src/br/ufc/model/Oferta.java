@@ -1,18 +1,16 @@
 package br.ufc.model;
 
-import java.util.Collection;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity(name="oferta")
@@ -34,7 +32,8 @@ public class Oferta {
     @JoinColumn(name = "usuario_id", unique=false)
 	private Usuario usuario;
 	
-	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date data = new Date();
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -67,7 +66,4 @@ public class Oferta {
 	public void setClassificado(Classificado classificado) {
 		this.classificado = classificado;
 	}
-	
-	
-	
 }
