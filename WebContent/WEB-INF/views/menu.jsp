@@ -8,7 +8,11 @@
 	<title>Menu</title>
 </head>
 <body>
-	<h2>Menu, Bem-vindo ${usuario_logado.nome} </h2>
+<h2>Menu, Bem-vindo ${usuario_logado.nome} </h2>
+	<form style="margin-top: -40px; margin-left: 900px;" method="post" action="buscarNoticias">
+		<input type="text" name="texto" onfocus="this.value = '';" onblur="if(this.value == '') this.value = 'Noticias';" value="Noticias"/>
+		<input type="submit" value="Botao"/>
+	</form>
 	<a href="helloSpring"> Hello Spring! </a> <br />
 
 	<a href="inserirAlunoFormulario"> Inserir Aluno </a> <br />
@@ -47,7 +51,7 @@
 	<a href="logout">Logout</a>
 	
 	<hr><br />
-	
+
 	<table border="1">
 		<tr> <th colspan="2"><font color="red">Noticias</font></th> </tr>
 		<tr> <th>Titulo</th><th>Conteudo</th> </tr>

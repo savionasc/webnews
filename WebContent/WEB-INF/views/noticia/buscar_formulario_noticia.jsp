@@ -8,10 +8,7 @@
 </head>
 <body>
 
-<form method="post" action="buscarNoticias">
-	<input type="text" name="texto" />
-	<input type="submit" value="Botao"/>
-</form>
+
 
 </body>
 </html>
