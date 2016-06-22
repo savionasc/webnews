@@ -1,0 +1,160 @@
+body{
+   background-color: #f5f8fa;
+}
+
+p{
+	background-color: white;
+}
+
+a{
+	color: #1b95e0;
+	text-decoration: none;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+#navigation_bar{
+	width: 100%;
+	background-color: white;
+	margin-bottom: 10px;
+}
+
+#navigation_bar ul li{
+	display: inline;
+	margin-left: 10px;
+}
+
+#navigation_bar ul li a:hover{
+	color: #1b95e0;
+	text-decoration: none;
+	border-bottom-style: solid;
+	border-bottom-width: 5px;
+	border-color: #1b95e0;	
+}
+
+#content{
+	max-width: 1190px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#content #column_1, #column_2, #column3{
+	margin:5px;
+}
+
+#column_1{		
+	width: 25%;	
+	float: left;
+	min-height: 200px;
+	background-color: white;	
+}
+
+#column_1 ul{
+	list-style: none;
+	padding: 0px;	
+	margin: 0px;
+}
+
+#column_1 ul li{
+	display: inline;
+}
+
+#column_2{
+	width: 47%;
+	float: left;
+	background-color: #e5f2f7;	
+}
+
+#column_3{	
+	width: 22%; 
+	float: left;
+}
+
+#column_3 div, p{
+	margin: 5px;
+}
+
+.nome_usr{
+	color: #292f33;
+	font-weight: bold;
+	font-size: 20px;
+	text-decoration: none;
+}
+
+.nome_usr:hover{
+	text-decoration: none;
+}
+
+#img_usr{
+	margin-left: 5px; 
+	border-color: white;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 5px;
+	width: 64px;
+	height: 64px;		
+}
+
+#cover_usr{
+	background-color: #1b95e0;
+	width: 100%;
+	height: 80px;	
+}
+
+.perf_usr{
+	color: #66757f;	
+	font-size: 14px;
+}
+
+.perf_usr:hover{
+	text-decoration: none;
+}
+
+#tzeet{
+	width: 98%;
+	margin: 5px;	
+}
+
+#tzeet p{
+	background-color: none;
+}
+
+#tzeet form textarea{
+	width: 99%;
+	resize: none;
+}
+
+#submit{
+	background-color: #0084b4;
+	color: white;
+	border-radius: 5px;
+	padding: 5px 15px;	
+	position: relative;	
+	left: 87%;
+}
+
+#count{
+	color: #8899a6;
+	position: relative;
+	left: 67%;
+}
+
+#trends{
+	background-color: white;
+}
+
+#trends ol{	
+	list-style: none;
+}
+	
+#footnote{
+	text-align: center;
+}
+
+.block{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #e1e8ed;	
+}

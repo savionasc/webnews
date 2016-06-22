@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" href="css/Tzeeter.css" />
+		<script type="text/javascript" src="js/script.js"></script>
+		<title> Tzeeter </title>
+	</head>
+
+	<body>
+		<div id="navigation_bar">
+			<ul>
+				<li> <a href="#principal" name="principal"> Principal </a>  </li>
+				<li> <a href="#notificacoes" name="notificacoes"> Notifica&ccedil;&otilde;es </a></li>
+				<li> <a href="#mensagens" name="mensagens"> Mensagens </a></li>
+			</ul>
+		</div>
+		
+		<div id="content">
+			<div id = "column_1" class="block">
+				<div id = "cover_usr">
+					<div id="img_usr"> <img alt="Yuuki Makoto" src="usr_img/yuukimakoto.jpg" /> </div>
+				</div>
+				<br />
+				<a class="nome_usr" name="nome_usuario" href="#nome_usuario"> Yuuki Makoto </a>
+				<br />
+				<a class="perf_usr" name="perfil_usuario" href="#perfil_usuario"> @yuukimakotoofficial </a>
+
+				<ul>
+					<li><a href="#zeets" name="zeets"> Zeets 200 </a></li>
+					<li><a href="#seguindo" name="seguindo"> Seguindo 50 </a></li>
+					<li><a href="#seguidores" name="seguidores"> Seguidores 130 </a></li>
+				</ul>
+			</div>
+
+			<div id = "column_2">
+				<!-- Inicio da Noticia -->
+				<p class="block"> 
+					<a class="nome_usr" href="#seguindo_1" name="seguindo_1"> Takeba Yukari </a> 
+					<a class="perf_usr" href="#perfil_seguindo_1" name="perfil_seguindo_1"> @takebayukariofficial </a>
+					<img alt="Takeba Yukari" src="usr_img/takebayukari.jpg"/>
+					<br/> 
+					${noticia.idNoticia}noticia noticia, noticia? (noticia, noticia!! &gt;.&lt;).
+				</p>
+				<!-- Fim da Noticia -->
+				
+				<div id="tzeet"> 
+					<form action="" method="get">
+						<p class="block">
+							<textarea rows="5" cols=""></textarea>
+							<button id="submit"> Enviar </button>
+							<span id="count"> 140 </span>
+						</p>
+					</form>
+				</div>
+				<p class="block"> 
+					<img alt="Takeba Yukari" src="usr_img/takebayukari.jpg"/>
+					<a class="nome_usr" href="#seguindo_1" name="seguindo_1"> Takeba Yukari </a> 
+					<a class="perf_usr" href="#perfil_seguindo_1" name="perfil_seguindo_1"> @takebayukariofficial </a>
+					<br/> 
+					Hey Makoto, how about we hang out some time after school? (Don't you dare to invite Iori!! &gt;.&lt;).
+				</p>
+
+				<p class="block">
+					<img alt="Kirijo Mitsuru" src="usr_img/kirijomitsuru.jpg"/>
+					<a class="nome_usr" href="#seguindo_2" name="seguindo_2"> Kirijo Mitsuru </a> 
+					<a class="perf_usr" href="#perfil_seguindo_2" name="perfil_seguindo2"> @kirijomitsuruofficial </a>
+					<br/>
+					Good morning. We'll be having a meeting tonight to talk about SEES plans for the summer vacation, at the usual place. Please, don't be late.
+				</p>
+			</div>
+
+			<div id = "column_3">
+				<div id="trends" class="block">
+					<p>Tend&ecirc;ncias</p>
+					<ol>
+						<li> <a href="#trending_1" name="trending_1"> Item 1 </a> </li>
+						<li> <a href="#trending_2" name="trending_2"> Item 2 </a> </li>
+						<li> <a href="#trending_3" name="trending_3"> Item 3 </a> </li>
+						<li> <a href="#trending_4" name="trending_4"> Item 4 </a> </li>
+					</ol>
+				</div>
+
+				<p id="footnote" class="block">
+					<a href="#copyright" name="copyright"> Todos os direitos resevados.</a>		
+				    <a href="http://validator.w3.org/check?uri=referer"> <br /> <img src="img/valid-xhtml10.png" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a> 
+				    <a href="http://jigsaw.w3.org/css-validator/check/referer"> <img style="border:0;width:88px;height:31px" src="img/vcss.gif" alt="CSS válido!" /></a>
+				    <br />
+				    Tzeeter &copy; 2016
+				</p>
+			</div>
+		</div>				
+	</body>
+</html>
