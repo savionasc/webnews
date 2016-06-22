@@ -113,7 +113,4 @@ public class Classificado {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	
-	
-	 
 }
