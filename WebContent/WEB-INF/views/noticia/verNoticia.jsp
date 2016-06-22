@@ -23,7 +23,7 @@
 				</div>
 			</div>
 			<br /> <a class="nome_usr" name="nome_usuario" href="#nome_usuario">
-				${administrador_logado.nome} </a> <br />
+				${usuario_logado.nome} </a> <br />
 				<a class="perf_usr"	name="perfil_usuario" href="#perfil_usuario">
 				@yuukimakotoofficial </a>
 
@@ -44,6 +44,8 @@
 			</p>
 			<!-- Fim da Noticia -->
 
+			<c:if test="${usuario_logado.id != null}">
+			
 			<div id="tzeet">
 				<form action="inserirComentario" method="get">
 					<p class="block">
@@ -55,6 +57,9 @@
 					</p>
 				</form>
 			</div>
+			
+			</c:if>
+			
 			<c:forEach var="c" items="${comentarios}">
 				<form method="post" action="apagarComentario">
 				<p class="block">
@@ -68,7 +73,7 @@
 					 <a class="perf_usr" href="#perfil_seguindo_1"	name="perfil_seguindo_1"> @${c.autor.email} </a> <br />
 						${c.texto}
 					<br />
-					<input type="hidden" name="idUsuario" value="${usuario_logado.id}${administrador_logado.id}" />
+					<input type="hidden" name="idUsuario" value="${usuario_logado.id}${usuario_logado.id}" />
 					<input type="hidden" value="${c.comentarioId}" name="id"/>
 					<c:if test="${(c.autor.id == usuario_logado.id)  || (noticia.autor.id == usuario_logado.id)}">
 						<input id="apagar" type="submit" value="APAGAR COMENTARIO" style="margin-left: 375px; margin-bottom: 5px;" />

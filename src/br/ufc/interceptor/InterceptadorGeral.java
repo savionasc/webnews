@@ -20,7 +20,8 @@ public class InterceptadorGeral extends HandlerInterceptorAdapter {
 				   URI.endsWith("login") ||
 				   URI.endsWith("irJornal") ||
 				   URI.endsWith("inserirUsuarioFormulario") ||
-				   URI.endsWith("inserirUsuario"))
+				   URI.endsWith("inserirUsuario") || URI.endsWith("listarComentarios")
+				   || URI.endsWith("home"))
 			
 				return true;
 		 

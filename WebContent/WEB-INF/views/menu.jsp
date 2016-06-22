@@ -5,6 +5,16 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<!-- thumbnail -->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="resources/thumbnail/bootstrap.min.css">
+  	<script src="resources/thumbnail/jquery.min.js"></script>
+  	<script src="resources/thumbnail/bootstrap.min.js"></script>
+  
+  	<!-- fim -->
+	
 	<title>Menu</title>
 </head>
 <body>
@@ -62,5 +72,21 @@
 		</tr>
 		</c:forEach>
 	</table>
+	
+	
+	<div class="container">
+	  <h2>Image Gallery</h2>
+	  <p>The .thumbnail class can be used to display an image gallery. Click on the images to see it in full size:</p>
+	  <div class="row">
+		<c:forEach var="a" items="${noticias}">
+		<div class="col-md-4">
+	      <a href="listarComentarios?id=${a.noticiaId}" class="thumbnail">
+	        <p>${a.titulo}</p>
+	        <img src="<c:url value="/resources/images/${a.noticiaId}.png" />" alt="Pulpit Rock" style="width:150px;height:150px">
+	      </a>
+	    </div>
+	    </c:forEach>
+	  </div>
+	</div>
 </body>
 </html>

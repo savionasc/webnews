@@ -45,6 +45,12 @@ public class LoginController {
 	public String loginFormulario(){
 		return "login_formulario";
 	}
+	@RequestMapping("/home")
+	public String home(Model model){
+		List<Noticia> noticias = this.nDAO.listar();
+		model.addAttribute("noticias", noticias);
+		return "index";
+	}
 	
 	@RequestMapping("/login")
 	public String login(boolean permanecer, Usuario usuario, HttpServletRequest request,HttpSession session, Model model, HttpServletResponse response){
