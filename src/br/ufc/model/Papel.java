@@ -12,6 +12,15 @@ import javax.persistence.ManyToMany;
 
 @Entity(name="papel")
 public class Papel {
+	
+	public Papel() {
+		super();
+	}
+	
+	public Papel(String papel) {
+		this.papel = papel;
+	}
+
 	@Id
 	@Column(name="id",nullable=false)
 	@GeneratedValue(strategy=GenerationType.AUTO)

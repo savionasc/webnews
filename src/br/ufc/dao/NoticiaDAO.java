@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import br.ufc.model.Comentario;
 import br.ufc.model.Noticia;
 
 @Repository
@@ -50,7 +49,15 @@ public class NoticiaDAO{
 		// TODO Auto-generated method stub
 		List<Noticia> noticias = manager.createQuery("select n from noticia as n order by acesso desc",
 				Noticia.class).getResultList();
-		return noticias.subList(0, 5);
+		if(noticias.size() > 0){
+			if(noticias.size() < 5){
+				return noticias.subList(0, noticias.size());
+			}
+			return noticias.subList(0, 5);
+		}
+		
+		return null;
+		
 	}
 	public Noticia recuperarId(Long id) {
 		return manager.find(Noticia.class, id);

@@ -37,6 +37,7 @@
 	<a href="listarClassificados">Listar Classificado</a> <br />	
 	<a href="buscarFormularioNoticias">Pesquisar noticias</a><br />
 	<a href="inserirClassificadoFormulario"> Inserir Classificado</a> <br />
+	<a href="verFavoritos"> Ver Favoritos</a> <br />
 	Usuarios
 
 	<c:forEach var="t" items="${listaTipos}">
@@ -62,24 +63,17 @@
 	
 	<hr><br />
 
-	<table border="1">
-		<tr> <th colspan="2"><font color="red">Noticias</font></th> </tr>
-		<tr> <th>Titulo</th><th>Conteudo</th> </tr>
-		<c:forEach var="a" items="${noticias}">
-		<tr>
-			<td>${a.titulo}</td>
-			<td>${a.texto}</td> 
-		</tr>
-		</c:forEach>
-	</table>
-	
-	
 	<div class="container">
 	  <h2>Image Gallery</h2>
 	  <p>The .thumbnail class can be used to display an image gallery. Click on the images to see it in full size:</p>
 	  <div class="row">
 		<c:forEach var="a" items="${noticias}">
 		<div class="col-md-4">
+		<form action="adicionarFavorito" method="post">
+			  <input type="hidden" value="${a.noticiaId}" name="noticia" />
+			  <input type="hidden" value="${usuario_logado.id}" name="usuario" />
+			  <a style="margin-left: 200px;" href="javascript:;" onclick="parentNode.submit();">Adicionar aos favoritos</a>
+		  </form>
 	      <a href="listarComentarios?id=${a.noticiaId}" class="thumbnail">
 	        <p>${a.titulo}</p>
 	        <img src="<c:url value="/resources/images/${a.noticiaId}.png" />" alt="Pulpit Rock" style="width:150px;height:150px">

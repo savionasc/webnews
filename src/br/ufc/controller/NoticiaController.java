@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.ufc.dao.FavoritoDAO;
 import br.ufc.dao.NoticiaDAO;
 import br.ufc.dao.SecaoDAO;
 import br.ufc.dao.UsuarioDAO;
+import br.ufc.model.Favorito;
 import br.ufc.model.Noticia;
 import br.ufc.model.Secao;
 import br.ufc.model.Usuario;
@@ -38,6 +40,10 @@ public class NoticiaController {
 	@Autowired
 	@Qualifier(value="secaoDAO")
 	private SecaoDAO sDAO;
+	
+	@Autowired
+	@Qualifier(value="favoritoDAO")
+	private FavoritoDAO fDAO;
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -122,5 +128,30 @@ public class NoticiaController {
 		noticia.setSecao(sDAO.recuperar(seccao));
 		nDAO.alterar(noticia);
 		return "redirect:listarNoticia";
+	}
+	
+	@RequestMapping("/verFavoritos")
+	public String verFavoritos(Long idUsuario, Model model){
+		List<Favorito> favoritos = this.fDAO.listar();
+		model.addAttribute("favoritos", favoritos);
+		
+		return "noticia/listar_favoritos";
+	}
+	
+	@RequestMapping("adicionarFavorito")
+	public String adicionarFavoritos(HttpServletRequest req){
+		Favorito favorito = new Favorito();
+		Usuario autor = uDAO.recuperar((long) Integer.parseInt(req.getParameter("usuario")));
+		Noticia noticia = nDAO.recuperar((long) Integer.parseInt(req.getParameter("noticia")));
+		favorito.setNoticia(noticia);
+		favorito.setUsuario(autor);
+		fDAO.inserir(favorito);
+		return "redirect:login";
+	}
+	
+	@RequestMapping("removerFavorito")
+	public String removerFavorito(Long id){
+		fDAO.apagar(id);
+		return "redirect:verFavoritos";
 	}
 }

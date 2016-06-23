@@ -19,7 +19,6 @@ public class Comentario {
 	
 	@OneToOne(optional=true)
     @JoinColumn(name = "noticia_id", unique=false)
-
 	private Noticia noticia;
 	
 	@ManyToOne(optional=true)

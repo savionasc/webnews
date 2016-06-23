@@ -29,7 +29,12 @@ public class Usuario {
 	
 	private String email;	
 	
-	private boolean imgEstado;
+	private boolean imgEstado = false;
+	
+	@OneToMany(mappedBy="usuario",
+			   targetEntity=Favorito.class,
+			   fetch=FetchType.EAGER)
+	private List<Favorito> favoritos;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	//id desse usuario
@@ -44,6 +49,18 @@ public class Usuario {
 			   targetEntity=Noticia.class,
 			   fetch=FetchType.EAGER)
 	private Collection<Noticia> noticias;
+	
+	public Usuario() {
+		super();
+	}
+	
+	public Usuario(String login, String senha, String nome,
+		List<Papel> papelList) {
+		this.login = login;
+		this.senha = senha;
+		this.nome = nome;
+		this.papelList = papelList;
+	}
 	
 	public List<Papel> getPapelList() {
 		return papelList;
@@ -102,10 +119,17 @@ public class Usuario {
 	public void setImgEstado(boolean imgEstado) {
 		this.imgEstado = imgEstado;
 	}
-
+	
+	public List<Favorito> getFavoritos() {
+		return favoritos;
+	}
+	
+	public void setFavoritos(List<Favorito> favoritos) {
+		this.favoritos = favoritos;
+	}
+	
 	@Override
-	public boolean equals(Object obj) {
-		
+	public boolean equals(Object obj) {	
 		if(!(obj instanceof Usuario))
 			return false;
 		
