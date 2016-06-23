@@ -47,7 +47,7 @@ public class LoginController {
 	}
 	@RequestMapping("/home")
 	public String home(Model model){
-		List<Noticia> noticias = this.nDAO.listar();
+		List<Noticia> noticias = this.nDAO.listar5MaisAcessadas();
 		model.addAttribute("noticias", noticias);
 		return "index";
 	}

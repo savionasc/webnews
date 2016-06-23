@@ -82,7 +82,7 @@ public class NoticiaController {
 		model.addAttribute("noticias", noticias);
 		
 		return "noticia/listar_noticia";
-	}	
+	}
 	
 	@RequestMapping("/listarNoticiaPorSecao")
 	public String listarNoticiaPorSecao(Long id, Model model){

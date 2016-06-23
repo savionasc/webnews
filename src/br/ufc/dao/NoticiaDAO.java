@@ -40,27 +40,17 @@ public class NoticiaDAO{
 		}
 		return null;
 	}
-	
-	public List<Comentario> recuperarComentarios(){
-		/*String hql = "select c from comentario as c "
-				+"where c.COMENTARIO_ID = :param_id";
-	
-		Query query = manager.createQuery(hql);
-		List<Comentario> papeis = 
-				query.setParameter("param_id", id).getResultList();
-		
-		if(papeis.size()!=0){
-			return papeis.get(0);
-		}
-
-		*/
-		return null;
-	}
 
 	public List<Noticia> listar() {
 		// TODO Auto-generated method stub
 		return manager.createQuery("select n from noticia as n",
 				Noticia.class).getResultList();
+	}
+	public List<Noticia> listar5MaisAcessadas() {
+		// TODO Auto-generated method stub
+		List<Noticia> noticias = manager.createQuery("select n from noticia as n order by acesso desc",
+				Noticia.class).getResultList();
+		return noticias.subList(0, 5);
 	}
 	public Noticia recuperarId(Long id) {
 		return manager.find(Noticia.class, id);

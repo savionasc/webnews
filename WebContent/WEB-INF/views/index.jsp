@@ -6,6 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Início</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="resources/thumbnail/bootstrap.min.css">
+  	<script src="resources/thumbnail/jquery.min.js"></script>
+  	<script src="resources/thumbnail/bootstrap.min.js"></script>
 </head>
 <body>
 <a href="loginFormulario"> Administração</a> |
@@ -24,12 +28,20 @@
 	</c:if>
     
 </c:forEach>
-	<br />Esportes <br />
-	Classificados <br />
-	Novidades <br />
-	Moda <br />
-	Politica <br />
-	Variedades <br />
-	
+	<br />	
+	<div class="container">
+	  <h2>Notícias</h2>
+	  <p>Noticias mais vistas do site.</p>
+	  <div class="row">
+		<c:forEach var="a" items="${noticias}">
+		<div class="col-md-4">
+	      <a href="listarComentarios?id=${a.noticiaId}" class="thumbnail">
+	        <p>${a.titulo}</p>
+	        <img src="<c:url value="/resources/images/${a.noticiaId}.png" />" alt="Pulpit Rock" style="width:150px;height:150px">
+	      </a>
+	    </div>
+	    </c:forEach>
+	  </div>
+	</div>
 </body>
 </html>
