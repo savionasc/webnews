@@ -5,25 +5,39 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Listar Usuario</title>
+	<!-- thumbnail -->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="resources/thumbnail/bootstrap.min.css">
+  	<script src="resources/thumbnail/jquery.min.js"></script>
+  	<script src="resources/thumbnail/bootstrap.min.js"></script>
+  
+  	<!-- fim -->
+<title>Listar noticias</title>
 </head>
 <body>
 
 Usuario logado: ${usuario_logado.nome}
-<table border="1">
-	<c:forEach var="n" items="${noticias}">
-	<tr>
-		<td>${n.noticiaId}</td>
-		<td>${n.titulo}</td>
-		<td>${n.texto}</td>
-		<td><img alt="${n.titulo}" src="<c:url value="/resources/images/${n.noticiaId}.png"  />" /></td>
-		<td><a href="alterarNoticiaFormulario?id=${n.noticiaId}">ALTERAR</a></td>
-		<td><a href="inserirComentarioFormulario?id=${n.noticiaId}">COMENTAR</a></td>
-		<td><a href="listarComentarios?id=${n.noticiaId}">Ver Comentarios</a></td>
-		<td><a href="apagarNoticia?id=${n.noticiaId}">APAGAR</a></td>
-	</tr>
-	</c:forEach>
-</table>
+<div class="container">
+	  <h2>Image Gallery</h2>
+	  <p>The .thumbnail class can be used to display an image gallery. Click on the images to see it in full size:</p>
+	  <div class="row">
+		<c:forEach var="a" items="${noticias}">
+		<div class="col-md-4">
+		<form action="adicionarFavorito" method="post">
+			  <input type="hidden" value="${a.noticiaId}" name="noticia" />
+			  <input type="hidden" value="${usuario_logado.id}" name="usuario" />
+			  <a style="margin-left: 200px;" href="javascript:;" onclick="parentNode.submit();">Adicionar aos favoritos</a>
+		  </form>
+	      <a href="listarComentarios?id=${a.noticiaId}" class="thumbnail">
+	        <p>${a.titulo}</p>
+	        <img src="<c:url value="/resources/images/${a.noticiaId}.png" />" alt="Pulpit Rock" style="width:150px;height:150px">
+	      </a>
+	    </div>
+	    </c:forEach>
+	  </div>
+	</div>
+
 
 </body>
 </html>
