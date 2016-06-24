@@ -58,5 +58,18 @@ public class Secao {
 	public void setNoticias(List<Noticia> noticias) {
 		this.noticias = noticias;
 	}
+
+	public Secao() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Secao(String titulo, String descricao) {
+		super();
+		this.titulo = titulo;
+		this.descricao = descricao;
+	}
+	
+	
 	
 }

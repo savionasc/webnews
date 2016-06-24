@@ -57,7 +57,7 @@ public class Usuario {
 	public Usuario(String login, String senha, String nome,
 		List<Papel> papelList) {
 		this.login = login;
-		this.senha = senha;
+		setSenha(senha);
 		this.nome = nome;
 		this.papelList = papelList;
 	}
@@ -100,8 +100,7 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		MD5Criptografia md5 = new MD5Criptografia();
-	        this.senha = md5.criptografar(senha);
-		//this.senha = senha;
+        this.senha = md5.criptografar(senha);
 	}
 
 	public String getEmail() {
@@ -136,7 +135,6 @@ public class Usuario {
 		Usuario ref = (Usuario)obj;
 		if(ref.getId()==this.id)
 			return true;
-		return false;
-		
+		return false;	
 	}	
 }
