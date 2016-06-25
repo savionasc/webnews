@@ -6,7 +6,6 @@
 
     <persistence-unit name="teste_aula_si" >
        	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-       	<class>br.ufc.model.Aluno</class>
         <class>br.ufc.model.Comentario</class>
  		<class>br.ufc.model.Classificado</class>
         <properties>
