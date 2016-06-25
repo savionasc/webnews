@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import br.ufc.model.Aluno;
 import br.ufc.model.Classificado;
 import br.ufc.model.Comentario;
 import br.ufc.model.Noticia;

@@ -29,7 +29,6 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 		<property name="maxUploadSize" value="500000" />
 	</bean>
 
-	<bean id="alunoDAO" class="br.ufc.dao.AlunoDAOHib"/>
 	<bean id="usuarioDAO" class="br.ufc.dao.UsuarioDAO"/>
 	<bean id="papelDAO" class="br.ufc.dao.PapelDAO"/>
 	<bean id="noticiaDAO" class="br.ufc.dao.NoticiaDAO"/>

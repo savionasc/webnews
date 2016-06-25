@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.ufc.dao.IAlunoDAO;
 import br.ufc.dao.NoticiaDAO;
 import br.ufc.dao.UsuarioDAO;
 import br.ufc.dao.PapelDAO;
@@ -24,10 +23,6 @@ import br.ufc.model.Usuario;
 
 @Controller
 public class LoginController {
-
-	@Autowired
-	@Qualifier(value="alunoDAO")
-	private IAlunoDAO aDAO;
 	
 	@Autowired
 	@Qualifier(value="usuarioDAO")
@@ -102,7 +97,7 @@ public class LoginController {
 			return "menu";
 		}
 		
-		return "redirect:loginFormulario";
+		return "falha";
 	}
 	
 	@RequestMapping("/logout")

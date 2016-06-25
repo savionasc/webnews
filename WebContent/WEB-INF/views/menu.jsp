@@ -22,15 +22,7 @@
 	<form style="margin-top: -40px; margin-left: 900px;" method="post" action="buscarNoticias">
 		<input type="text" name="texto" onfocus="this.value = '';" onblur="if(this.value == '') this.value = 'Noticias';" value="Noticias"/>
 		<input type="submit" value="Botao"/>
-	</form>
-	<a href="helloSpring"> Hello Spring! </a> <br />
-
-	<a href="inserirAlunoFormulario"> Inserir Aluno </a> <br />
-
-	<a href="listarAluno">Listar Alunos</a> <br />
-	Alunos
-	
-	<hr>	
+	</form>	
 	
 	<a href="inserirUsuarioFormulario"> Inserir Usuario </a> <br />
 	<a href="listarNoticia">Listar Noticias</a> <br />
