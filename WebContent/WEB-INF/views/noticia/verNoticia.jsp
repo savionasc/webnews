@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -52,7 +53,7 @@
 						<input type="hidden" name="idNoticia" value="${noticia.noticiaId}" />
 						<input type="hidden" name="idUsuario" value="${usuario_logado.id}" />
 						<textarea rows="5" cols="" name="texto"></textarea>
-						<button id="submit">Enviar</button>
+						<button id="submit"><fmt:message key="botao.enviar"/></button>
 						<span id="count"> 140 </span>
 					</p>
 				</form>
@@ -85,7 +86,7 @@
 		</div>
 		<div id = "column_3">
 			<div id="trends" class="block">
-				<p>Seções</p>
+				<p><fmt:message key="campo.secoes"/></p>
 				<ol>
 					<c:forEach var="s" items="${secoes}">
 						<li> <a href="#trending_${s.secaoId}" name="trending_${s.secaoId}"> ${s.titulo} </a> </li>	

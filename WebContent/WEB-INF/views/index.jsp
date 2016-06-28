@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,15 +17,16 @@
   
   	<!-- fim -->
   	
-	<title>Início</title>
+	<title><fmt:message key="index.titulo"/></title>
 </head>
 <body>
-<a href="loginFormulario"> Administração</a> |
-<a href="irJornal"> Ir para jornal</a>
+
+<a href="loginFormulario"> <fmt:message key="index.login"/></a> |
+<a href="irJornal"> <fmt:message key="index.jornal"/></a>
 
 <br/>
 <hr>
-<a href="inserirUsuarioFormulario"> Cadastre-se </a> <br />
+<a href="inserirUsuarioFormulario"> <fmt:message key="index.cadastro"/></a> <br />
 <c:forEach items="${cookie}" var="currentCookie">  
 	<c:if test="${(currentCookie.value.name == 'Orbita') && (currentCookie.value.value != '')}">
 	Cookie name as map entry key: ${currentCookie.key}<br/>
@@ -36,8 +39,8 @@
 </c:forEach>
 	<br />	
 	<div class="container">
-	  <h2>Notícias</h2>
-	  <p>Noticias mais vistas do site.</p>
+	  <h2><fmt:message key="index.titulo.noticias"/></h2>
+	  <p><fmt:message key="index.subtitulo.noticias"/></p>
 	  <div class="row">
 		<c:forEach var="a" items="${noticias}">
 		<div class="col-md-4">

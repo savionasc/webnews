@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HelloSpring {
-
+	
+	@RequestMapping("/testelingua")
+	public String testelingua(){
+		
+		return "testelingua.jsp";
+	}
 	@RequestMapping("/helloSpring")
 	public String helloSpring(){
 		System.out.println("Entrei no Hello Spring!");

@@ -6,13 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta http-equiv="Refresh" content="3;url=linguas.jsp">
-<title>Idioma alterado</title>
+<title>teste</title>
 </head>
 <body>
+<form action="testelingua">
 <c:if test="${not empty param.lingua}">
-  <fmt:setLocale value="${param.lingua}" scope="session"/>
-  Language changed. Please, wait 3 seconds.
+  <input value="${param.lingua}" name="local">
 </c:if>
+<input type="submit" />
+</form>
+
 </body>
 </html>

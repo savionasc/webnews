@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,18 +17,17 @@
 <title>Listar noticias</title>
 </head>
 <body>
-
-Usuario logado: ${usuario_logado.nome}
+<fmt:message key="campo.usuario.logado"/> ${usuario_logado.nome}
 <div class="container">
-	  <h2>Image Gallery</h2>
-	  <p>The .thumbnail class can be used to display an image gallery. Click on the images to see it in full size:</p>
+	  <h2><fmt:message key="menu.thumb.titulo"/> </h2>
+	  <p><fmt:message key="menu.thumb.subtitulo"/></p>
 	  <div class="row">
 		<c:forEach var="a" items="${noticias}">
 		<div class="col-md-4">
 		<form action="adicionarFavorito" method="post">
 			  <input type="hidden" value="${a.noticiaId}" name="noticia" />
 			  <input type="hidden" value="${usuario_logado.id}" name="usuario" />
-			  <a style="margin-left: 200px;" href="javascript:;" onclick="parentNode.submit();">Adicionar aos favoritos</a>
+			  <a style="margin-left: 200px;" href="javascript:;" onclick="parentNode.submit();"><fmt:message key="menu.thumb.addfavorito"/> </a>
 		  </form>
 	      <a href="listarComentarios?id=${a.noticiaId}" class="thumbnail">
 	        <p>${a.titulo}</p>
