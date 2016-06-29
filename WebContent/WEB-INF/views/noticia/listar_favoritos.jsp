@@ -14,7 +14,7 @@
   	<script src="resources/thumbnail/bootstrap.min.js"></script>
   
   	<!-- fim -->
-<title>Listar Usuario</title>
+<title><fmt:message key="menu.campo.verFavoritos"/></title>
 
 </head>
 <body>

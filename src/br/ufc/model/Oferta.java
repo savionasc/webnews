@@ -22,7 +22,7 @@ public class Oferta {
 	private Long id_oferta;
 	
 	private Double preco;
-		
+	
 	@OneToOne(optional=true)
 	@JoinColumn(name="CLASSIFICADO_ID",
 				referencedColumnName="CLASSIFICADO_ID")

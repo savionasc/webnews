@@ -6,12 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Listar Classificados</title>
+<title><fmt:message key="listar.classificadoI.titulo"/></title>
 </head>
 <body>
 
 <fmt:message key="campo.usuario.logado"/>${usuario_logado.nome}<br />
-<h4>Classificados Inativos</h4>
+<h4><fmt:message key="listar.classificadoI.titulo"/></h4>
 <table border="1">
 	<c:forEach var="c" items="${classificados}">
 	<c:if test="${c.ativo == false}">

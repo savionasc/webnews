@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Inserir Seção</title>
+<title><fmt:message key="menu.campo.inserirSecao"/></title>
 </head>
 <body>
-	<h2>Inserir Seção</h2><br />
+	<h2><fmt:message key="menu.campo.inserirSecao"/></h2><br />
 	<form action="inserirSecao" method="post">
 		<fmt:message key="campo.titulo"/><input type="text" name="titulo" />
 		<form:errors path="aluno.nome" /> 

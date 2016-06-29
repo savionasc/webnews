@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Inserir Papel</title>
+<title><fmt:message key="inserir.papel.titulo"/></title>
 </head>
 <body>
-	<h2>Inserir Nova função do Usuário</h2><br />
+	<h2><fmt:message key="inserir.papel.tituloH2"/></h2><br />
 	<form action="inserirPapel" method="post">
 		<fmt:message key="campo.nome"/><input type="text" name="papel" />
 		<form:errors path="aluno.nome" /> 

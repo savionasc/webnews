@@ -146,6 +146,7 @@ public class NoticiaController {
 		favorito.setNoticia(noticia);
 		favorito.setUsuario(autor);
 		fDAO.inserir(favorito);
+		
 		return "redirect:login";
 	}
 	

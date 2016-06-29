@@ -14,7 +14,7 @@
 		<fmt:message key="campo.login"/> <input type="text" name="login" value="a"/> <br />
 		<fmt:message key="campo.senha"/> <input type="text" name="senha" value="a"/> <br />
 		<input name="permanecer" type="checkbox" /> <fmt:message key="login.campo.checkbox"/><br />
-		<input type="submit" value="<fmt:message key="login.campo.botao"/>" /> 
+		<input type="submit" value="<fmt:message key="botao.enviar"/>" /> 
 	</form>
 </body>
 </html>

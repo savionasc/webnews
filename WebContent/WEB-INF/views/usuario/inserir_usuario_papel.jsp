@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Usuario Papel</title>
+<title><fmt:message key="menu.campo.inserirUsuario"/></title>
 </head>
 <body>
 	<form action="inserirUsuario" method="post" enctype="multipart/form-data">

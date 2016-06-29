@@ -14,7 +14,7 @@
   	<script src="resources/thumbnail/bootstrap.min.js"></script>
   
   	<!-- fim -->
-<title>Listar noticias</title>
+<title><fmt:message key="menu.campo.listarNoticia"/></title>
 </head>
 <body>
 <fmt:message key="campo.usuario.logado"/> ${usuario_logado.nome}

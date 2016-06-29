@@ -17,6 +17,9 @@ public class FavoritoDAO {
 	EntityManager manager;
 	
 	public void inserir(Favorito favorito){
+		if(recuperar(favorito.getId()) != null){
+			
+		}
 		manager.persist(favorito);
 	}
 	

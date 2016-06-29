@@ -58,8 +58,8 @@
 	<hr><br />
 
 	<div class="container">
-	  <h2><fmt:message key="menu.thumb.titulo"/>Image Gallery</h2>
-	  <p><fmt:message key="menu.thumb.subtitulo"/>The .thumbnail class can be used to display an image gallery. Click on the images to see it in full size:</p>
+	  <h2><fmt:message key="menu.thumb.titulo"/></h2>
+	  <p><fmt:message key="menu.thumb.subtitulo"/></p>
 	  <div class="row">
 		<c:forEach var="a" items="${noticias}">
 		<div class="col-md-4">

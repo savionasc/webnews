@@ -1,6 +1,5 @@
 package br.ufc.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,13 +16,13 @@ public class Favorito {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne(optional=true, cascade=CascadeType.ALL)
+	@ManyToOne(optional=true)
 	@JoinColumn(name="usuario_id",
 				referencedColumnName="id", unique=false)
 	private Usuario usuario;
 	
-	@OneToOne(optional=true, cascade=CascadeType.ALL)
-    @JoinColumn(name = "noticia_id", unique=false)
+	@OneToOne(optional=true)
+    @JoinColumn(name = "noticia_id", unique=true)
 	private Noticia noticia;
 
 	public Long getId() {
