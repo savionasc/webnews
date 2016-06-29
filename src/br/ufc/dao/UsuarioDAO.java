@@ -82,6 +82,16 @@ public class UsuarioDAO{
 		
 		return manager.find(Usuario.class, u);
 
-	}	
+	}
+	public List<Usuario> buscar(String texto) {
+		// TODO Auto-generated method stub
+		String hql = "select u from usuario as u "
+				+"where u.nome like :param_texto";
+	
+		Query query = manager.createQuery(hql);
+		List<Usuario> usuarios = 
+				query.setParameter("param_texto", '%'+texto+'%').getResultList();
+		return usuarios;
+	}
 
 }
