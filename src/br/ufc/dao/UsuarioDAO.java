@@ -13,8 +13,6 @@ import javax.servlet.http.Cookie;
 
 import org.springframework.stereotype.Repository;
 
-import br.ufc.model.Noticia;
-import br.ufc.model.Papel;
 import br.ufc.model.Usuario;
 
 @Repository
