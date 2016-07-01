@@ -10,31 +10,24 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 import br.ufc.dao.UsuarioDAO;
 import br.ufc.model.Papel;
 import br.ufc.model.Usuario;
 
-@Transactional
-@Controller
 public class DummyDB {
-	
-	@Autowired
-	@Qualifier(value="usuarioDAO")
-	private UsuarioDAO uDAO;
 	
 	private int totalCountries;
 	private String data = "Afghanistan,	Albania, Zimbabwe, hutie, xut";
 	private List<String> countries;
 	
 	public List<String> getData(String query) {
-		//List<Usuario> news = uDAO.listar();
 		List<Usuario> news = new ArrayList<Usuario>();
 		List<Papel> p = new ArrayList<Papel>();
 		Papel px = new Papel();
 		p.add(px);
-		
+				
 		news.add(new Usuario("r", "r", "Silvio", p));
 		news.add(new Usuario("r", "r", "Savio", p));
 		news.add(new Usuario("r", "r", "bambo", p));

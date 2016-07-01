@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.ufc.model.Noticia;
+import br.ufc.model.Secao;
 
 @Repository
 public class NoticiaDAO{
@@ -59,6 +60,28 @@ public class NoticiaDAO{
 		return null;
 		
 	}
+	
+	public List<Noticia> listar5MaisRecentes(Secao secao) {
+		// TODO Auto-generated method stub
+		
+		String hql = "select n from noticia as n where n.secao = :param_id order by n.noticiaId desc";
+	
+		Query query = manager.createQuery(hql);
+		List<Noticia> noticias = 
+				query.setParameter("param_id", secao).getResultList();
+
+		if(noticias.size() > 0){
+			
+			if(noticias.size() < 5){
+				return noticias.subList(0, noticias.size());
+			}
+			return noticias.subList(0, 5);
+		}
+		
+		return null;
+		
+	}
+	
 	public Noticia recuperarId(Long id) {
 		return manager.find(Noticia.class, id);
 	}

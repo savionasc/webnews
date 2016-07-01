@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta http-equiv="Refresh" content="3;url=linguas.jsp">
+<meta http-equiv="Refresh" content="3;url=home">
 <title>Idioma alterado</title>
 </head>
 <body>

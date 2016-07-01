@@ -1,5 +1,6 @@
 package br.ufc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -72,6 +73,20 @@ public class UsuarioDAO{
 		// TODO Auto-generated method stub
 		return manager.createQuery("Select u from usuario as u",
 				Usuario.class).getResultList();
+	}
+	
+	public List<String> listarNomes() {
+		// TODO Auto-generated method stub
+		
+		List<Usuario> users = manager.createQuery("Select u from usuario as u",
+				Usuario.class).getResultList();
+		
+		List<String> userString = new ArrayList<String>();
+		
+		for (Usuario user : users) {
+			userString.add(user.getNome());
+		}
+		return userString;
 	}
 
 	public Usuario recuperar(String usuario, boolean x) {

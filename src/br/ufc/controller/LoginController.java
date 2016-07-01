@@ -1,12 +1,12 @@
 package br.ufc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,10 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ufc.dao.NoticiaDAO;
+import br.ufc.dao.SecaoDAO;
 import br.ufc.dao.UsuarioDAO;
 import br.ufc.dao.PapelDAO;
 import br.ufc.model.Noticia;
 import br.ufc.model.Papel;
+import br.ufc.model.Secao;
 import br.ufc.model.Usuario;
 
 @Controller
@@ -36,6 +38,10 @@ public class LoginController {
 	@Qualifier(value="noticiaDAO")
 	private NoticiaDAO nDAO;
 	
+	@Autowired
+	@Qualifier(value="secaoDAO")
+	private SecaoDAO sDAO;
+	
 	@RequestMapping("/loginFormulario")
 	public String loginFormulario(){
 		return "login_formulario";
@@ -44,6 +50,16 @@ public class LoginController {
 	public String home(Model model){
 		List<Noticia> noticias = this.nDAO.listar5MaisAcessadas();
 		model.addAttribute("noticias", noticias);
+		
+		noticias = this.nDAO.listar5MaisRecentes(sDAO.recuperar(1l));
+		model.addAttribute("noticias1", noticias);
+		
+		noticias = this.nDAO.listar5MaisRecentes(sDAO.recuperar(2l));
+		model.addAttribute("noticias2", noticias);
+		
+		noticias = this.nDAO.listar5MaisRecentes(sDAO.recuperar(3l));
+		model.addAttribute("noticias3", noticias);
+		
 		return "index";
 	}
 	

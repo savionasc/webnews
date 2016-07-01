@@ -39,6 +39,52 @@
 </c:forEach>
 	<br />	
 	<div class="container">
+	  <c:if test="${noticias1 != null}">
+	  <h2><fmt:message key="index.titulo.esportes"/></h2>
+	  <p><fmt:message key="index.subtitulo.noticias"/></p>
+	  <div class="row">
+		<c:forEach var="a" items="${noticias1}">
+		<div class="col-md-4">
+	      <a href="listarComentarios?id=${a.noticiaId}" class="thumbnail">
+	        <p>${a.titulo}</p>
+	        <img src="<c:url value="/resources/images/${a.noticiaId}.png" />" alt="Pulpit Rock" style="width:150px;height:150px">
+	      </a>
+	    </div>
+	    </c:forEach>
+	  </div>
+	  </c:if>
+	  
+	  <c:if test="${noticias2 != null}">
+	  <h2><fmt:message key="index.titulo.culinaria"/></h2>
+	  <p><fmt:message key="index.subtitulo.noticias"/></p>
+	  <div class="row">
+		<c:forEach var="a" items="${noticias2}">
+		<div class="col-md-4">
+	      <a href="listarComentarios?id=${a.noticiaId}" class="thumbnail">
+	        <p>${a.titulo}</p>
+	        <img src="<c:url value="/resources/images/${a.noticiaId}.png" />" alt="Pulpit Rock" style="width:150px;height:150px">
+	      </a>
+	    </div>
+	    </c:forEach>
+	  </div>
+	  </c:if>
+	  
+	  <c:if test="${noticias3 != null}">
+	  <h2><fmt:message key="index.titulo.politica"/></h2>
+	  <p><fmt:message key="index.subtitulo.noticias"/></p>
+	  <div class="row">
+		<c:forEach var="a" items="${noticias3}">
+		<div class="col-md-4">
+	      <a href="listarComentarios?id=${a.noticiaId}" class="thumbnail">
+	        <p>${a.titulo}</p>
+	        <img src="<c:url value="/resources/images/${a.noticiaId}.png" />" alt="Pulpit Rock" style="width:150px;height:150px">
+	      </a>
+	    </div>
+	    </c:forEach>
+	  </div>
+	  
+	  </c:if>
+	  <c:if test="${noticias != null}">
 	  <h2><fmt:message key="index.titulo.noticias"/></h2>
 	  <p><fmt:message key="index.subtitulo.noticias"/></p>
 	  <div class="row">
@@ -51,12 +97,16 @@
 	    </div>
 	    </c:forEach>
 	  </div>
+	  </c:if>
+	
 	</div>
 	
 	
 	<div class="jumbotron">
-	  <h1>Hello, world!</h1>
-	  <p>...</p>
+	  <p>Mudar Idioma</p>
+  <a href="mudaLingua.jsp?lingua=de_DE">Deutsch</a>
+  <a href="mudaLingua.jsp?lingua=en_US">English</a>
+  <a href="mudaLingua.jsp?lingua=pt_BR">Português</a>
 	  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
 	</div>
 	

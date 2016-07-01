@@ -53,7 +53,7 @@
 	</c:forEach>
 
 	<br />
-	<a href="logout"> <fmt:message key="menu.campo.logout"/> a</a>
+	<a href="logout"> <fmt:message key="campo.logout"/></a>
 	
 	<hr><br />
 
