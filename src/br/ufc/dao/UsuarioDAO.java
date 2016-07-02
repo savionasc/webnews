@@ -34,6 +34,7 @@ public class UsuarioDAO{
 
 	public Usuario recuperar(Long id) {
 		// TODO Auto-generated method stub
+		System.out.println("id: "+id);
 		return manager.find(Usuario.class, id);
 	}
 	public Cookie recuperaUsuarioPorCookie(Cookie[] cooks){

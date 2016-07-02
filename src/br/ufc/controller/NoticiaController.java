@@ -1,6 +1,7 @@
 package br.ufc.controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -65,7 +66,10 @@ public class NoticiaController {
 		if(result.hasFieldErrors("nome")){
 			return "noticia/inserir_noticia_formulario";
 		}
+		String language = req.getParameter("lingua");
+        Locale locale = new Locale(language);
 		
+        noticia.setLocale(locale);
 		Secao secao = sDAO.recuperar(req.getParameter("secaoValores"));
 		noticia.setSecao(secao);
 		Usuario autor = uDAO.recuperar((long) Integer.parseInt(req.getParameter("usuario")));
@@ -83,8 +87,10 @@ public class NoticiaController {
 	
 	
 	@RequestMapping("/listarNoticia")
-	public String listarNoticia(Model model){
-		List<Noticia> noticias = this.nDAO.listar();
+	public String listarNoticia(Model model, HttpServletRequest req){
+		String language = req.getParameter("l");
+        Locale local = new Locale(language);
+		List<Noticia> noticias = this.nDAO.listarPorRegiao(local);
 		model.addAttribute("noticias", noticias);
 		
 		return "noticia/listar_noticia";
@@ -131,8 +137,9 @@ public class NoticiaController {
 	}
 	
 	@RequestMapping("/verFavoritos")
-	public String verFavoritos(Long idUsuario, Model model){
-		List<Favorito> favoritos = this.fDAO.listar();
+	public String verFavoritos(Long u, Model model){
+		Usuario user = uDAO.recuperar(u);
+		List<Favorito> favoritos = this.fDAO.listar(user);
 		model.addAttribute("favoritos", favoritos);
 		
 		return "noticia/listar_favoritos";

@@ -10,9 +10,9 @@
 <title>Inserir Noticia</title>
 </head>
 <body>
-	
 	<form action="inserirNoticia" method="post" enctype="multipart/form-data">
-		 <input type="hidden" value="${usuario_logado.id}${administrador_logado.id}" name="usuario" />
+		 <input type="hidden" value="${usuario_logado.id}" name="usuario" />
+		 <input type="hidden" value="<fmt:message key="local"/>" name="lingua" />
 		<fmt:message key="campo.titulo"/> <input type="text" name="titulo" />
 		<br />
 		<fmt:message key="campo.secao"/> <select name="secaoValores" onblur="">

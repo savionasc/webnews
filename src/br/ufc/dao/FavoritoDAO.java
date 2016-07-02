@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.ufc.model.Favorito;
+import br.ufc.model.Usuario;
 
 @Repository
 public class FavoritoDAO {
@@ -17,10 +18,8 @@ public class FavoritoDAO {
 	EntityManager manager;
 	
 	public void inserir(Favorito favorito){
-		if(recuperar(favorito.getId()) != null){
-			
-		}
 		manager.persist(favorito);
+		
 	}
 	
 	public void alterar(Favorito favorito){
@@ -31,6 +30,14 @@ public class FavoritoDAO {
 		// TODO Auto-generated method stub
 		return manager.createQuery("select f from favorito as f",
 				Favorito.class).getResultList();
+	}
+	
+	public List<Favorito> listar(Usuario id) {
+		// TODO Auto-generated method stub
+		String hql = "select f from favorito as f "
+				+"where f.usuario = :param_favorito";
+		Query query = manager.createQuery(hql);
+		return query.setParameter("param_favorito", id).getResultList();
 	}
 	
 	public Favorito recuperar(Long id) {

@@ -1,6 +1,7 @@
 package br.ufc.dao;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -46,22 +47,33 @@ public class NoticiaDAO{
 		return manager.createQuery("select n from noticia as n",
 				Noticia.class).getResultList();
 	}
-	public List<Noticia> listar5MaisAcessadas() {
+	
+	public List<Noticia> listarPorRegiao(Locale local) {
+		// TODO Auto-generated method stub
+		String hql = "select n from noticia as n "
+				+"where n.locale = :param_local";
+	
+		Query query = manager.createQuery(hql);
+		List<Noticia> noticias = 
+				query.setParameter("param_local", local).getResultList();
+		return noticias;
+	}
+	public List<Noticia> listar6MaisAcessadas() {
 		// TODO Auto-generated method stub
 		List<Noticia> noticias = manager.createQuery("select n from noticia as n order by acesso desc",
 				Noticia.class).getResultList();
 		if(noticias.size() > 0){
-			if(noticias.size() < 5){
+			if(noticias.size() < 6){
 				return noticias.subList(0, noticias.size());
 			}
-			return noticias.subList(0, 5);
+			return noticias.subList(0, 6);
 		}
 		
 		return null;
 		
 	}
 	
-	public List<Noticia> listar5MaisRecentes(Secao secao) {
+	public List<Noticia> listar6MaisRecentes(Secao secao) {
 		// TODO Auto-generated method stub
 		
 		String hql = "select n from noticia as n where n.secao = :param_id order by n.noticiaId desc";
@@ -72,10 +84,10 @@ public class NoticiaDAO{
 
 		if(noticias.size() > 0){
 			
-			if(noticias.size() < 5){
+			if(noticias.size() < 6){
 				return noticias.subList(0, noticias.size());
 			}
-			return noticias.subList(0, 5);
+			return noticias.subList(0, 6);
 		}
 		
 		return null;

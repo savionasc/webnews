@@ -22,7 +22,7 @@ public class Favorito {
 	private Usuario usuario;
 	
 	@OneToOne(optional=true)
-    @JoinColumn(name = "noticia_id", unique=true)
+    @JoinColumn(name = "noticia_id", unique=false)
 	private Noticia noticia;
 
 	public Long getId() {

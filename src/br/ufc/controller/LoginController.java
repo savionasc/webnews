@@ -48,16 +48,16 @@ public class LoginController {
 	}
 	@RequestMapping("/home")
 	public String home(Model model){
-		List<Noticia> noticias = this.nDAO.listar5MaisAcessadas();
+		List<Noticia> noticias = this.nDAO.listar6MaisAcessadas();
 		model.addAttribute("noticias", noticias);
 		
-		noticias = this.nDAO.listar5MaisRecentes(sDAO.recuperar(1l));
+		noticias = this.nDAO.listar6MaisRecentes(sDAO.recuperar(1l));
 		model.addAttribute("noticias1", noticias);
 		
-		noticias = this.nDAO.listar5MaisRecentes(sDAO.recuperar(2l));
+		noticias = this.nDAO.listar6MaisRecentes(sDAO.recuperar(2l));
 		model.addAttribute("noticias2", noticias);
 		
-		noticias = this.nDAO.listar5MaisRecentes(sDAO.recuperar(3l));
+		noticias = this.nDAO.listar6MaisRecentes(sDAO.recuperar(3l));
 		model.addAttribute("noticias3", noticias);
 		
 		return "index";

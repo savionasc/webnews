@@ -27,11 +27,11 @@
 	</form>	
 	
 	<a href="inserirUsuarioFormulario"><fmt:message key="menu.campo.inserirUsuario"/></a> <br />
-	<a href="listarNoticia"><fmt:message key="menu.campo.listarNoticia"/></a> <br />
+	<a href="listarNoticia?l=<fmt:message key="local"/>"><fmt:message key="menu.campo.listarNoticia"/></a> <br />
 	<a href="listarClassificados"><fmt:message key="menu.campo.listarClassificados"/></a> <br />	
 	<a href="buscarFormularioNoticias"><fmt:message key="menu.campo.buscarNoticias"/></a><br />
 	<a href="inserirClassificadoFormulario"><fmt:message key="menu.campo.inserirClassificado"/></a> <br />
-	<a href="verFavoritos"><fmt:message key="menu.campo.verFavoritos"/></a> <br />
+	<a href="verFavoritos?u=${usuario_logado.id}"><fmt:message key="menu.campo.verFavoritos"/></a> <br />
 	Usuarios
 
 	<c:forEach var="t" items="${listaTipos}">

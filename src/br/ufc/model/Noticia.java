@@ -1,5 +1,7 @@
 package br.ufc.model;
 
+import java.util.Locale;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.ManyToOne;
 
 @Entity(name="noticia")
 public class Noticia {
+	
 	@Id
 	@Column(name="NOTICIA_ID",nullable=false)
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -22,26 +25,12 @@ public class Noticia {
 	
 	private Long acesso = 0l;
 	
-	/*
-	@Column(name="SECAO_ID",
-			insertable=false,
-			updatable=false,
-			nullable=false)*/
-	//private Long secaoId;
+	private Locale locale;
 	
-	
-	//@OneToOne(cascade = CascadeType.ALL, optional=true)
-	//@JoinColumn(name="AUTOR_ID")
-	//private Usuario autor;
 	@ManyToOne(optional=true, cascade=CascadeType.ALL)
 	@JoinColumn(name="id_secao",
 				referencedColumnName="SECAO_ID", unique=false)
 	private Secao secao;
-	
-	/*
-	@OneToOne(optional=true, cascade=CascadeType.REMOVE)
-    @JoinColumn(name = "id", unique=false)
-	private Usuario id;*/
 	
 	@ManyToOne(optional=true, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="id_autor",
@@ -70,14 +59,15 @@ public class Noticia {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	/*public Usuario getSecao() {
-		return id;
+	
+	public Locale getLocale() {
+		return locale;
 	}
 
-	public void setId(Usuario id) {
-		this.id = id;
-	}*/
-	
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
 	public Usuario getAutor() {
 		return autor;
 	}
@@ -101,6 +91,4 @@ public class Noticia {
 	public void setAcesso(Long acesso) {
 		this.acesso = acesso;
 	}
-	
-	
 }
