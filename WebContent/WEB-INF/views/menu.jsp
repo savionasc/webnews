@@ -43,6 +43,7 @@
 	    <li class="active"><a href="login"><fmt:message key="menu.campo.inicio"/> <span class="sr-only">(current)</span></a></li>
         <li><a href="inserirUsuarioFormulario"><fmt:message key="menu.campo.inserirUsuario"/></a></li>
         <li><a href="listarNoticia?l=<fmt:message key="local"/>"><fmt:message key="menu.campo.listarNoticia"/></a> </li>
+        <li><a href="resultados">noticias antigo</a> </li>
         <li><a href="verFavoritos?u=${usuario_logado.id}"><fmt:message key="menu.campo.verFavoritos"/></a></li>
         
         <li class="dropdown">
@@ -88,22 +89,16 @@
 		<input type="submit" value="Botao"/>
 	</form>	
 	
-	<a href="inserirUsuarioFormulario"><fmt:message key="menu.campo.inserirUsuario"/></a> <br />
-	<a href="listarNoticia?l=<fmt:message key="local"/>"><fmt:message key="menu.campo.listarNoticia"/></a> <br />
-	<a href="listarClassificados"><fmt:message key="menu.campo.listarClassificados"/></a> <br />	
-	<a href="buscarFormularioNoticias"><fmt:message key="menu.campo.buscarNoticias"/></a><br />
-	<a href="inserirClassificadoFormulario"><fmt:message key="menu.campo.inserirClassificado"/></a> <br />
-	<a href="verFavoritos?u=${usuario_logado.id}"><fmt:message key="menu.campo.verFavoritos"/></a> <br />
-	Usuarios
-
-	<c:forEach var="t" items="${listaTipos}">
-		<hr>
+		<c:forEach var="t" items="${listaTipos}">
+		
 		<c:if test="${t.id == 2}">
+		<hr>
 			<a href="inserirNoticiaFormulario"><fmt:message key="menu.campo.inserirNoticia"/></a> <br />
 			<a href="listarSecoes"><fmt:message key="menu.campo.listarSecoes"/></a> <br />	
 			jornalista
 		</c:if>
 		<c:if test="${t.id == 3}">
+			<hr>
 			Cadastrar Jornalista<br />
 			<a href="inserirSecaoFormulario"><fmt:message key="menu.campo.inserirSecao"/></a> <br />
 			<a href="listarUsuario"><fmt:message key="menu.campo.listarUsuario"/></a> <br />

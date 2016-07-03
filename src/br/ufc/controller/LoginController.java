@@ -1,6 +1,5 @@
 package br.ufc.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -20,7 +19,6 @@ import br.ufc.dao.UsuarioDAO;
 import br.ufc.dao.PapelDAO;
 import br.ufc.model.Noticia;
 import br.ufc.model.Papel;
-import br.ufc.model.Secao;
 import br.ufc.model.Usuario;
 
 @Controller
@@ -65,15 +63,45 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	public String login(boolean permanecer, Usuario usuario, HttpServletRequest request,HttpSession session, Model model, HttpServletResponse response){
-		if(session.getAttribute("usuario_logado") == null){
-			Cookie[] cooks = request.getCookies();		
-			Cookie c = (uDAO.recuperaUsuarioPorCookie(cooks));
-			Usuario candidato;
-			if(c != null){
-				if(!c.getValue().equals("")){
-					candidato = uDAO.recuperar((long) Integer.parseInt(c.getValue()));
-					List<Papel> listP = candidato.getPapelList();
+		Cookie[] cooks = request.getCookies();		
+		Cookie c = (uDAO.recuperaUsuarioPorCookie(cooks));
+		Usuario candidato;
+		if(c != null){
+			if(!c.getValue().equals("/")){
+				candidato = uDAO.recuperar((long) Integer.parseInt(c.getValue()));
+				List<Papel> listP = candidato.getPapelList();
+				session.setAttribute("usuario_logado", candidato);
+				session.setAttribute("Tipo", listP.get(listP.size()-1).getId());
+
+				List<Noticia> noticias = this.nDAO.listar();
+				model.addAttribute("noticias", noticias);
+				
+				return "menu";
+			}
+		}
+			
+			if(session.getAttribute("usuario_logado") != null){
+				List<Noticia> noticias = this.nDAO.listar();
+				model.addAttribute("noticias", noticias);
+				return "menu";
+			}
+			
+			candidato = uDAO.recuperar(usuario.getLogin());
+			
+			if(candidato!=null){
+				if(candidato.getSenha().equals(usuario.getSenha())){
+					Usuario aux = uDAO.recuperar(usuario.getLogin());
+					
+					List<Papel> listP = aux.getPapelList();
+					
+					if(permanecer == true){
+						Cookie cookie = new Cookie("Orbita", ""+candidato.getId());
+					    response.addCookie(cookie);	
+					}
+				    
+				    
 					session.setAttribute("usuario_logado", candidato);
+					session.setAttribute("listaTipos", listP);
 					session.setAttribute("Tipo", listP.get(listP.size()-1).getId());
 
 					List<Noticia> noticias = this.nDAO.listar();
@@ -81,38 +109,7 @@ public class LoginController {
 					
 					return "menu";
 				}
-			}else{
-				candidato = uDAO.recuperar(usuario.getLogin());
-				
-				if(candidato!=null){
-					if(candidato.getSenha().equals(usuario.getSenha())){
-						Usuario aux = uDAO.recuperar(usuario.getLogin());
-						
-						List<Papel> listP = aux.getPapelList();
-						
-						if(permanecer == true){
-							Cookie cookie = new Cookie("Orbita", ""+candidato.getId());
-						    response.addCookie(cookie);	
-						}
-					    
-					    
-						session.setAttribute("usuario_logado", candidato);
-						session.setAttribute("listaTipos", listP);
-						session.setAttribute("Tipo", listP.get(listP.size()-1).getId());
-
-						List<Noticia> noticias = this.nDAO.listar();
-						model.addAttribute("noticias", noticias);
-						
-						return "menu";
-					}
-				}
 			}
-		}else{
-			List<Noticia> noticias = this.nDAO.listar();
-			model.addAttribute("noticias", noticias);
-			return "menu";
-		}
-		
 		return "falha";
 	}
 	
@@ -123,7 +120,7 @@ public class LoginController {
 		
 		for (Cookie cookie : cooks) {
 			if(cookie.getName().equals("Orbita")){
-				cookie.setValue(null);
+				cookie.setValue("/");
 				response.addCookie(cookie);
 				break;
 			}

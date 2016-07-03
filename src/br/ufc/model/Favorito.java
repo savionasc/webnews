@@ -21,8 +21,11 @@ public class Favorito {
 				referencedColumnName="id", unique=false)
 	private Usuario usuario;
 	
-	@OneToOne(optional=true)
-    @JoinColumn(name = "noticia_id", unique=false)
+	//@OneToOne(optional=true)
+    //@JoinColumn(name = "noticia_id", unique=false)
+	@ManyToOne(optional=true)
+	@JoinColumn(name="noticia_id",
+				referencedColumnName="NOTICIA_ID", unique=false)
 	private Noticia noticia;
 
 	public Long getId() {

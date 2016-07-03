@@ -12,9 +12,6 @@ public class InterceptadorGeral extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler) throws Exception {
 		
 		
-		//dica:
-			//Criar uma lista de permitidos ou de bloqueador para nao cadastrados
-			//percorre a lista e pronto
 		String URI = request.getRequestURI();
 		if(URI.endsWith("loginFormulario") ||
 				   URI.endsWith("login") ||

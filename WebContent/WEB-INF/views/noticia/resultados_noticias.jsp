@@ -10,15 +10,14 @@
 <body>
 
 <table border="1">
-	<c:forEach var="u" items="${noticias}">
+	<c:forEach var="n" items="${noticias}">
 	<tr>
-		<td>${u.id}</td>
-		<td>${u.nome}</td>
-		<td>${u.login}</td>
-		<td>${u.senha}</td>
-		<td><img alt="${n.titulo}" src="<c:url value="/resources/images/${n.id}.png"  />" /></td>
-		<td><a href="alterarUsuarioFormulario?id=${u.id}">ALTERAR</a></td>
-		<td><a href="apagarUsuario?id=${u.id}">APAGAR</a></td>
+		<td>${n.noticiaId}</td>
+		<td>${n.titulo}</td>
+		<td>${n.texto}</td>
+		<td><img alt="${n.titulo}" src="<c:url value="/resources/images/${n.noticiaId}.png"  />" /></td>
+		<td><a href="alterarNoticiaFormulario?id=${n.noticiaId}">ALTERAR</a></td>
+		<td><a href="apagarNoticia?id=${n.noticiaId}">APAGAR</a></td>
 	</tr>
 	</c:forEach>
 </table>

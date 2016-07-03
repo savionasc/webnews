@@ -1,15 +1,18 @@
 package br.ufc.model;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name="noticia")
 public class Noticia {
@@ -36,6 +39,14 @@ public class Noticia {
 	@JoinColumn(name="id_autor",
 				referencedColumnName="id", unique=false)
 	private Usuario autor;
+	
+	@OneToMany(mappedBy="noticia",
+			   targetEntity=Favorito.class,
+			   fetch=FetchType.EAGER)
+	private List<Favorito> favoritos;
+	
+	private boolean inativo = false;
+	
 	public Long getNoticiaId() {
 		return noticiaId;
 	}
@@ -90,5 +101,21 @@ public class Noticia {
 
 	public void setAcesso(Long acesso) {
 		this.acesso = acesso;
+	}
+
+	public List<Favorito> getFavoritos() {
+		return favoritos;
+	}
+
+	public void setFavoritos(List<Favorito> favoritos) {
+		this.favoritos = favoritos;
+	}
+
+	public boolean isInativo() {
+		return inativo;
+	}
+
+	public void setInativo(boolean inativo) {
+		this.inativo = inativo;
 	}
 }

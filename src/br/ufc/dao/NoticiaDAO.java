@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import br.ufc.model.Favorito;
 import br.ufc.model.Noticia;
 import br.ufc.model.Secao;
 
@@ -30,7 +31,7 @@ public class NoticiaDAO{
 	public Noticia recuperar(Long id) {
 		// TODO Auto-generated method stub
 		String hql = "select n from noticia as n "
-				+"where n.noticiaId = :param_id";
+				+"where n.noticiaId = :param_id and inativo = 0";
 	
 		Query query = manager.createQuery(hql);
 		List<Noticia> noticias = 
@@ -44,14 +45,14 @@ public class NoticiaDAO{
 
 	public List<Noticia> listar() {
 		// TODO Auto-generated method stub
-		return manager.createQuery("select n from noticia as n",
+		return manager.createQuery("select n from noticia as n where inativo = 0",
 				Noticia.class).getResultList();
 	}
 	
 	public List<Noticia> listarPorRegiao(Locale local) {
 		// TODO Auto-generated method stub
 		String hql = "select n from noticia as n "
-				+"where n.locale = :param_local";
+				+"where n.locale = :param_local and inativo = 0";
 	
 		Query query = manager.createQuery(hql);
 		List<Noticia> noticias = 
@@ -60,7 +61,7 @@ public class NoticiaDAO{
 	}
 	public List<Noticia> listar6MaisAcessadas() {
 		// TODO Auto-generated method stub
-		List<Noticia> noticias = manager.createQuery("select n from noticia as n order by acesso desc",
+		List<Noticia> noticias = manager.createQuery("select n from noticia as n where inativo = 0 order by acesso desc",
 				Noticia.class).getResultList();
 		if(noticias.size() > 0){
 			if(noticias.size() < 6){
@@ -76,7 +77,7 @@ public class NoticiaDAO{
 	public List<Noticia> listar6MaisRecentes(Secao secao) {
 		// TODO Auto-generated method stub
 		
-		String hql = "select n from noticia as n where n.secao = :param_id order by n.noticiaId desc";
+		String hql = "select n from noticia as n where n.secao = :param_id and inativo = 0 order by n.noticiaId desc";
 	
 		Query query = manager.createQuery(hql);
 		List<Noticia> noticias = 
@@ -97,7 +98,7 @@ public class NoticiaDAO{
 	public Noticia recuperarId(Long id) {
 		return manager.find(Noticia.class, id);
 	}
-	public void apagar(Long id) {
+	/*public void apagar(Long id) {
 		Noticia aux = recuperarId(id);
 		if(aux != null){
 			System.out.println("Remover:"+aux.getTitulo()+" "+aux.getTexto());
@@ -105,7 +106,17 @@ public class NoticiaDAO{
 			
 		}
 		
+	}*/
+	
+	public void desativar(Long id) {
+		Noticia aux = recuperarId(id);
+		if(aux != null){
+			aux.setInativo(true);
+			manager.merge(aux);
+		}
+		
 	}
+	
 	public List<Noticia> buscar(String texto) {
 		// TODO Auto-generated method stub
 		String hql = "select n from noticia as n "

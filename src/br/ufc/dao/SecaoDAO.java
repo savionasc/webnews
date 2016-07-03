@@ -51,10 +51,8 @@ public class SecaoDAO {
 				return null;
 	}
 	public Secao recuperar(Long id) {
-		// TODO Auto-generated method stub
 		String hql = "select s from secao as s "
 				+"where s.secaoId = :param_secao";
-		//System.out.println("Comentario:"+id);
 		Query query = manager.createQuery(hql);
 		List<Secao> secao = 
 				query.setParameter("param_secao", id).getResultList();
@@ -62,7 +60,6 @@ public class SecaoDAO {
 		if(secao.size()!=0){
 			return secao.get(0);
 		}
-
 		return null;
 	}
 	

@@ -19,10 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.ufc.dao.FavoritoDAO;
 import br.ufc.dao.NoticiaDAO;
+import br.ufc.dao.NotificacaoDAO;
 import br.ufc.dao.SecaoDAO;
 import br.ufc.dao.UsuarioDAO;
 import br.ufc.model.Favorito;
 import br.ufc.model.Noticia;
+import br.ufc.model.Notificacao;
 import br.ufc.model.Secao;
 import br.ufc.model.Usuario;
 import br.ufc.util.AulaFileUtil;
@@ -47,6 +49,10 @@ public class NoticiaController {
 	private FavoritoDAO fDAO;
 	
 	@Autowired
+	@Qualifier(value="notificacaoDAO")
+	private NotificacaoDAO ntDAO;
+	
+	@Autowired
 	private ServletContext servletContext;
 
 	
@@ -54,15 +60,18 @@ public class NoticiaController {
 	public String inserirNoticiaFormulario(Model model){
 		List<Secao> secoes = this.sDAO.listar();
 		model.addAttribute("secoes", secoes);
-		//List<Usuario> usuarios = this.uDAO.listar();
-		//model.addAttribute("usuarios", usuarios);
 		return "noticia/inserir_noticia_formulario";
+	}
+	@RequestMapping("/resultados")
+	public String resultados(Model model){
+		List<Noticia> noticias = this.nDAO.listar();
+		model.addAttribute("noticias", noticias);
+		return "noticia/resultados_noticias";
 	}
 	
 	@RequestMapping("/inserirNoticia")
 	public String inserirNoticia(@Valid Noticia noticia, HttpServletRequest req,
 							   BindingResult result, @RequestParam(value="imagem", required=false) MultipartFile imagem){
-		//JOptionPane.showMessageDialog(null, "ENTROU!!!");
 		if(result.hasFieldErrors("nome")){
 			return "noticia/inserir_noticia_formulario";
 		}
@@ -106,8 +115,16 @@ public class NoticiaController {
 	}
 	@RequestMapping("/apagarNoticia")
 	public String apagarNoticia(Long id){
-		this.nDAO.apagar(id);
-		return "redirect:listarNoticia";
+		Noticia noticia = nDAO.recuperar(id);
+		List<Favorito> favoritos = noticia.getFavoritos();
+		Notificacao note;
+		for (Favorito favorito : favoritos) {
+			note = new Notificacao(favorito.getUsuario(), "Uma noticia que você favoritou foi apagada!");
+			ntDAO.inserir(note);
+			fDAO.apagar(favorito.getId());
+		}
+		this.nDAO.desativar(id);
+		return "redirect:resultados";
 	}
 	
 	@RequestMapping("buscarFormularioNoticias")
@@ -128,12 +145,24 @@ public class NoticiaController {
 		model.addAttribute("noticia", noticia);
 		return "noticia/alterar_noticia_formulario";
 	}
+	
 	@RequestMapping("/alterarNoticia")
 	public String alterarNoticia(Noticia noticia, Long seccao, Long idAutor){
 		noticia.setAutor(uDAO.recuperar(idAutor));
 		noticia.setSecao(sDAO.recuperar(seccao));
+		Noticia noticia2 = nDAO.recuperar(noticia.getNoticiaId());
+		List<Favorito> favoritos = noticia2.getFavoritos();
+		Notificacao note;
+		if(favoritos != null){
+			for (Favorito favorito : favoritos) {
+				note = new Notificacao(favorito.getUsuario(), "A <a href=listarComentarios?id="+noticia.getNoticiaId()+">noticia</a> foi alterada!");
+				ntDAO.inserir(note);
+			}
+			
+		}
+		
 		nDAO.alterar(noticia);
-		return "redirect:listarNoticia";
+		return "redirect:resultados";
 	}
 	
 	@RequestMapping("/verFavoritos")
