@@ -3,6 +3,7 @@ package br.ufc.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ufc.dao.ClassificadoDAO;
+import br.ufc.dao.NotificacaoDAO;
 import br.ufc.dao.UsuarioDAO;
 import br.ufc.dao.OfertaDAO;
 import br.ufc.model.Classificado;
+import br.ufc.model.Notificacao;
 import br.ufc.model.Oferta;
 import br.ufc.model.Papel;
 import br.ufc.model.Usuario;
@@ -37,6 +40,10 @@ public class ClassificadoController {
 	@Qualifier(value="ofertaDAO")
 	private OfertaDAO oDAO;
 	
+	@Autowired
+	@Qualifier(value="notificacaoDAO")
+	private NotificacaoDAO ntDAO;
+	
 	@RequestMapping("/inserirClassificadoFormulario")
 	public String inserirClassificadoFormulario(){
 		return "classificado/inserir_classificado_formulario";
@@ -48,7 +55,6 @@ public class ClassificadoController {
 		if(result.hasFieldErrors("nome")){
 			return "classificado/inserir_classificado_formulario";
 		}
-		
 		
 		Usuario autor = uDAO.recuperar(idUsuario);
 		List<Papel> ps = autor.getPapelList();
@@ -65,8 +71,15 @@ public class ClassificadoController {
 	}
 
 	@RequestMapping("/listarClassificados")
-	public String listarClassificados(Model model){
+	public String listarClassificados(Model model, HttpSession session){
 		List<Classificado> classificados = this.clDAO.listar();
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
+		
 		model.addAttribute("classificados", classificados);
 		return "classificado/listar_classificados";
 	}
@@ -116,6 +129,8 @@ public class ClassificadoController {
 	public String ativarClassificado(Long id){
 		Classificado classificado = clDAO.recuperar(id);
 		classificado.setAtivo(true);
+		Notificacao note = new Notificacao(classificado.getAutor(), "Seu classificado foi aprovado!");
+		ntDAO.inserir(note);
 		clDAO.alterar(classificado);
 		return "redirect:listarClassificadosInativos";
 	}
@@ -128,7 +143,10 @@ public class ClassificadoController {
 			return "redirect:listarClassificados";
 		}else{
 			clDAO.apagar(id);
+			Notificacao note = new Notificacao(classificado.getAutor(), "Seu classificado foi Recusado!");
+			ntDAO.inserir(note);
 			return "redirect:listarClassificadosInativos";
+			
 		}
 		
 	}

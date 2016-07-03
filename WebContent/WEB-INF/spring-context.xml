@@ -36,6 +36,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="comentarioDAO" class="br.ufc.dao.ComentarioDAO"/>
 	<bean id="classificadoDAO" class="br.ufc.dao.ClassificadoDAO"/>
 	<bean id="ofertaDAO" class="br.ufc.dao.OfertaDAO"/>
+	<bean id="notificacaoDAO" class="br.ufc.dao.NotificacaoDAO"/>
 		
 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />

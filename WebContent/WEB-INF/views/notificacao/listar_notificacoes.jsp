@@ -1,19 +1,25 @@
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Inserir Noticia</title>
-<link rel="stylesheet" href="resources/thumbnail/bootstrap.min.css">
-<script src="resources/thumbnail/jquery.min.js"></script>
-<script src="resources/thumbnail/bootstrap.min.js"></script>
+<title>Listar Classificados</title>
+
+<!-- thumbnail -->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="resources/thumbnail/bootstrap.min.css">
+  	<script src="resources/thumbnail/jquery.min.js"></script>
+  	<script src="resources/thumbnail/bootstrap.min.js"></script>
+  
+  	<!-- fim -->
 
 </head>
 <body>
+
 <!-- Menu -->
 
 <nav class="navbar navbar-default">
@@ -37,11 +43,11 @@
         <li><a href="inserirUsuarioFormulario"><fmt:message key="menu.campo.inserirUsuario"/></a></li>
         <li><a href="listarNoticia?l=<fmt:message key="local"/>"><fmt:message key="menu.campo.listarNoticia"/></a> </li>
         <li><a href="verFavoritos?u=${usuario_logado.id}"><fmt:message key="menu.campo.verFavoritos"/></a></li>
-        
+		<li><a href="inserirNotificacaoFormulario"><fmt:message key="menu.campo.notificacoes"/> <span class="badge">${notificacoes}</span></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><fmt:message key="menu.campo.Classificados"/> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="listarClassificados"><fmt:message key="menu.campo.listarClassificados"/></a></li>
+            <li class="active"><a href="listarClassificados"><fmt:message key="menu.campo.listarClassificados"/></a></li>
             <li><a href="inserirClassificadoFormulario"><fmt:message key="menu.campo.inserirClassificado"/></a> </li>
           </ul>
         </li>
@@ -53,7 +59,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <li><a href="logout"> <fmt:message key="campo.logout"/></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -71,24 +77,18 @@
 
 <!-- Fim de menu -->
 
-
-
-	<form action="inserirNoticia" method="post" enctype="multipart/form-data">
-		 <input type="hidden" value="${usuario_logado.id}" name="usuario" />
-		 <input type="hidden" value="<fmt:message key="local"/>" name="lingua" />
-		<fmt:message key="campo.titulo"/> <input type="text" name="titulo" />
-		<br />
-		<fmt:message key="campo.secao"/> <select name="secaoValores" onblur="">
-		<c:forEach var="s" items="${secoes}">
-			<option value="${s.secaoId}">${s.titulo}</option>
-		
-		</c:forEach>
-		</select><br /> 
-		<fmt:message key="campo.texto"/> <input type="text" name="texto" /> <br />
-		<fmt:message key="campo.imagem"/> <input type="file" name="imagem" /><br />		
-		<input type="submit" value="<fmt:message key="botao.enviar"/>" />
-		
-	</form>
+<fmt:message key="campo.usuario.logado"/> ${usuario_logado.nome}<br />
+<h4>Classificados ativos</h4>
+<table border="1">
+	<c:forEach var="n" items="${notificacoesLista}">
+	<tr>
+		<td>${n.id}</td>
+		<td>${n.texto}</td>
+		<td><a href="visualizarNotificacao?id=${n.id}">Visualisar</a></td>
+		<td><a href="apagarNotificacao?id=${n.id}">APAGAR</a></td>
+	</tr>
+	</c:forEach>
+</table>
 
 </body>
 </html>

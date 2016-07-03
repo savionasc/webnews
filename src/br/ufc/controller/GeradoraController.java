@@ -41,32 +41,38 @@ public class GeradoraController {
 	
 	public void criarPapeis(){
 		List<Papel> p = pDAO.listar();
-		if(p.size() == 0){
-			pDAO.inserir(new Papel("Leitor"));
-			pDAO.inserir(new Papel("Jornalista"));
-			pDAO.inserir(new Papel("Editor"));
-			pDAO.inserir(new Papel("ADM"));
-			System.out.println("Papeis criados com sucesso!");
+		if(p != null){
+			if(p.size() == 0){
+				pDAO.inserir(new Papel("Leitor"));
+				pDAO.inserir(new Papel("Jornalista"));
+				pDAO.inserir(new Papel("Editor"));
+				pDAO.inserir(new Papel("ADM"));
+				System.out.println("Papeis criados com sucesso!");
+			}
 		}
 	}
 	
 	public void criarADM(){
 		List<Usuario> u = uDAO.listar();
 		List<Papel> p = pDAO.listar();
-		if(u.size() == 0){
-			//uDAO.inserir(new Usuario("AdM123", "SeNhA123", "ADM", p));
-			uDAO.inserir(new Usuario("a", "a", "ADM", p));
-			System.out.println("Usuarios cadastrados com sucesso!");
+		if(p != null){
+			if(u.size() == 0){
+				//uDAO.inserir(new Usuario("AdM123", "SeNhA123", "ADM", p));
+				uDAO.inserir(new Usuario("a", "a", "ADM", p));
+				System.out.println("Usuarios cadastrados com sucesso!");
+			}
 		}
 	}
 	
 	public void criarSecoes(){
 		List<Secao> s = sDAO.listar();
-		if(s.size() == 0){
-			sDAO.inserir(new Secao("Esportes", "Aqui você ver todas as atualidades de esportes."));
-			sDAO.inserir(new Secao("Culinaria", "Aqui você ver nas tecnicas de cozinhar."));
-			sDAO.inserir(new Secao("Politica", "Aqui você ver o de sempre, mas o que muda é a sua indignação."));
-			System.out.println("Seções cadastradas com sucesso!");
+		if(s != null){
+			if(s.size() == 0){
+				sDAO.inserir(new Secao("Esportes", "Aqui você ver todas as atualidades de esportes."));
+				sDAO.inserir(new Secao("Culinaria", "Aqui você ver nas tecnicas de cozinhar."));
+				sDAO.inserir(new Secao("Politica", "Aqui você ver o de sempre, mas o que muda é a sua indignação."));
+				System.out.println("Seções cadastradas com sucesso!");
+			}
 		}
 	}
 }

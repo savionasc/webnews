@@ -36,8 +36,12 @@ public class Usuario {
 			   fetch=FetchType.EAGER)
 	private List<Favorito> favoritos;
 	
+	@OneToMany(mappedBy="usuario",
+			   targetEntity=Notificacao.class,
+			   fetch=FetchType.EAGER)
+	private List<Notificacao> notificacoes;
+	
 	@ManyToMany(fetch=FetchType.EAGER)
-	//id desse usuario
 	@JoinTable(name="PAPEL_USUARIO",
 			joinColumns=@JoinColumn(name="USUARIO_ID",
 									referencedColumnName="id"),
@@ -127,6 +131,14 @@ public class Usuario {
 		this.favoritos = favoritos;
 	}
 	
+	public List<Notificacao> getNotificacoes() {
+		return notificacoes;
+	}
+
+	public void setNotificacoes(List<Notificacao> notificacoes) {
+		this.notificacoes = notificacoes;
+	}
+
 	@Override
 	public boolean equals(Object obj) {	
 		if(!(obj instanceof Usuario))
