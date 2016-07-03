@@ -39,13 +39,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-	
 	    <li class="active"><a href="login"><fmt:message key="menu.campo.inicio"/> <span class="sr-only">(current)</span></a></li>
         <li><a href="inserirUsuarioFormulario"><fmt:message key="menu.campo.inserirUsuario"/></a></li>
         <li><a href="listarNoticia?l=<fmt:message key="local"/>"><fmt:message key="menu.campo.listarNoticia"/></a> </li>
         <li><a href="resultados">noticias antigo</a> </li>
         <li><a href="verFavoritos?u=${usuario_logado.id}"><fmt:message key="menu.campo.verFavoritos"/></a></li>
-        
+		       
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><fmt:message key="menu.campo.Classificados"/> <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -53,29 +52,48 @@
             <li><a href="inserirClassificadoFormulario"><fmt:message key="menu.campo.inserirClassificado"/></a> </li>
           </ul>
         </li>
+        
+        <c:forEach var="t" items="${listaTipos}">
+		<c:if test="${t.id == 2}"> 
+		
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Jornalista <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="inserirNoticiaFormulario"><fmt:message key="menu.campo.inserirNoticia"/></a></li>
+            <li><a href="listarSecoes"><fmt:message key="menu.campo.listarSecoes"/></a> </li>
+          </ul>
+        </li>
+        		
+		</c:if>
+        </c:forEach>
+        
       </ul>
       <form class="navbar-form navbar-left" role="search" method="post" action="buscarNoticias">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="<fmt:message key="menu.campo.listarNoticia"/>">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default"><fmt:message key="campo.pesquisar"/></button>
       </form>
       
 		
-      
-      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout"> <fmt:message key="campo.logout"/></a></li>
+        <c:forEach var="t" items="${listaTipos}">
+		<c:if test="${t.id == 3}">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Editor <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="inserirSecaoFormulario"><fmt:message key="menu.campo.inserirSecao"/></a></li>
+            <li><a href="listarUsuario"><fmt:message key="menu.campo.listarUsuario"/></a></li>
+            <li><a href="listarClassificadosInativos"><fmt:message key="menu.campo.listarClassificadosInativos"/></a></li>
+            <li><a href="inserirPapelFormulario"><fmt:message key="menu.campo.inserirPapel"/></a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#">Cadastrar Jornalista</a></li>
           </ul>
         </li>
+		</c:if>
+	
+	</c:forEach>
+      	<li><a href="logout"> <fmt:message key="campo.logout"/></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -88,26 +106,7 @@
 		<input type="text" name="texto" onfocus="this.value = '';" onblur="if(this.value == '') this.value = 'Noticias';" value="Noticias"/>
 		<input type="submit" value="Botao"/>
 	</form>	
-	
-		<c:forEach var="t" items="${listaTipos}">
-		
-		<c:if test="${t.id == 2}">
-		<hr>
-			<a href="inserirNoticiaFormulario"><fmt:message key="menu.campo.inserirNoticia"/></a> <br />
-			<a href="listarSecoes"><fmt:message key="menu.campo.listarSecoes"/></a> <br />	
-			jornalista
-		</c:if>
-		<c:if test="${t.id == 3}">
-			<hr>
-			Cadastrar Jornalista<br />
-			<a href="inserirSecaoFormulario"><fmt:message key="menu.campo.inserirSecao"/></a> <br />
-			<a href="listarUsuario"><fmt:message key="menu.campo.listarUsuario"/></a> <br />
-			<a href="listarClassificadosInativos"><fmt:message key="menu.campo.listarClassificadosInativos"/></a><br />	
-			<a href="inserirPapelFormulario"><fmt:message key="menu.campo.inserirPapel"/></a> <br />
-			Editor
-		</c:if>
-	
-	</c:forEach>
+        Cadastrar Jornalista<br />
 
 	<br />
 	<a href="logout"> <fmt:message key="campo.logout"/></a>
