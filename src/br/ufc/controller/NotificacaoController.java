@@ -51,8 +51,10 @@ public class NotificacaoController {
 		if(session.getAttribute("usuario_logado") != null){
 			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
 			
-			List<Notificacao> notificacoes = this.ntDAO.listar(usuario);
-			model.addAttribute("notificacoesLista", notificacoes);
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+			List<Notificacao> notificacoesx = this.ntDAO.listar(usuario);
+			model.addAttribute("notificacoesLista", notificacoesx);
 		}
 		return "notificacao/listar_notificacoes";
 	}

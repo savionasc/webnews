@@ -120,7 +120,7 @@ public class NoticiaDAO{
 	public List<Noticia> buscar(String texto) {
 		// TODO Auto-generated method stub
 		String hql = "select n from noticia as n "
-				+"where n.titulo like :param_texto";
+				+"where n.titulo like :param_texto and inativo = 0";
 	
 		Query query = manager.createQuery(hql);
 		List<Noticia> noticias = 

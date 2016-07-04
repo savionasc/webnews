@@ -45,7 +45,15 @@ public class ClassificadoController {
 	private NotificacaoDAO ntDAO;
 	
 	@RequestMapping("/inserirClassificadoFormulario")
-	public String inserirClassificadoFormulario(){
+	public String inserirClassificadoFormulario(Model model, HttpSession session){
+		
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
+		
 		return "classificado/inserir_classificado_formulario";
 	}
 	
@@ -85,7 +93,14 @@ public class ClassificadoController {
 	}
 	
 	@RequestMapping("fazerOfertaFormulario")
-	public String fazerOfertaFormulario(Classificado classificado, Model model){
+	public String fazerOfertaFormulario(Classificado classificado, Model model, HttpSession session){
+		
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
 		model.addAttribute("classificado", classificado);
 		return "classificado/inserir_oferta";
 	}
@@ -119,7 +134,13 @@ public class ClassificadoController {
 			
 	}
 	@RequestMapping("/listarClassificadosInativos")
-	public String listarClassificadosInativos(Model model){
+	public String listarClassificadosInativos(Model model, HttpSession session){
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
 		List<Classificado> classificados = this.clDAO.listar();
 		model.addAttribute("classificados", classificados);
 		return "classificado/listar_classificados_inativos";

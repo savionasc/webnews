@@ -59,6 +59,18 @@ public class GeradoraController {
 			if(u.size() == 0){
 				//uDAO.inserir(new Usuario("AdM123", "SeNhA123", "ADM", p));
 				uDAO.inserir(new Usuario("a", "a", "ADM", p));
+				List<Papel> p1 = pDAO.listar();
+				p1.remove(3);
+				uDAO.inserir(new Usuario("editor", "editor", "Editor", p1));
+				List<Papel> p2 = pDAO.listar();
+				p2.remove(3);
+				p2.remove(2);
+				uDAO.inserir(new Usuario("jornalista", "jornalista", "Jornalista", p2));
+				List<Papel> p3 = pDAO.listar();
+				p3.remove(3);
+				p3.remove(2);
+				p3.remove(1);
+				uDAO.inserir(new Usuario("leitor", "leitor", "Leitor", p3));
 				System.out.println("Usuarios cadastrados com sucesso!");
 			}
 		}

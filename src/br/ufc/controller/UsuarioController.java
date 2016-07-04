@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.ufc.dao.NotificacaoDAO;
 import br.ufc.dao.PapelDAO;
 import br.ufc.dao.UsuarioDAO;
 import br.ufc.model.Papel;
@@ -36,12 +38,26 @@ public class UsuarioController {
 	private PapelDAO pDAO;
 	
 	@Autowired
+	@Qualifier(value="notificacaoDAO")
+	private NotificacaoDAO ntDAO;
+	
+	@Autowired
 	private ServletContext servletContext;
 	
 	@RequestMapping("/inserirUsuarioFormulario")
-	public String inserirUsuarioFormulario(Model model){
+	public String inserirUsuarioFormulario(Model model, HttpSession session){
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+			model.addAttribute("tam", usuario.getPapelList().size());
+		}
+		
 		List<Papel> papeis = this.pDAO.listar();
+		papeis.remove(3);
 		model.addAttribute("papeis", papeis);
+		
 		
 		return "usuario/inserir_usuario_papel";
 	}
@@ -79,8 +95,14 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/listarUsuario")
-	public String listarUsuario(Model model){
+	public String listarUsuario(Model model, HttpSession session){
 		
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
 		
 		List<Usuario> usuarios = this.uDAO.listar();
 		model.addAttribute("usuarios", usuarios);

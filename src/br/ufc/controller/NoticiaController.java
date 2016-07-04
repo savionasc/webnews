@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,13 @@ public class NoticiaController {
 
 	
 	@RequestMapping("/inserirNoticiaFormulario")
-	public String inserirNoticiaFormulario(Model model){
+	public String inserirNoticiaFormulario(Model model, HttpSession session){
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
 		List<Secao> secoes = this.sDAO.listar();
 		model.addAttribute("secoes", secoes);
 		return "noticia/inserir_noticia_formulario";
@@ -96,7 +103,14 @@ public class NoticiaController {
 	
 	
 	@RequestMapping("/listarNoticia")
-	public String listarNoticia(Model model, HttpServletRequest req){
+	public String listarNoticia(Model model, HttpServletRequest req, HttpSession session){
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
+		
 		String language = req.getParameter("l");
         Locale local = new Locale(language);
 		List<Noticia> noticias = this.nDAO.listarPorRegiao(local);
@@ -128,11 +142,23 @@ public class NoticiaController {
 	}
 	
 	@RequestMapping("buscarFormularioNoticias")
-	public String buscarFormularioNoticias(){
+	public String buscarFormularioNoticias(Model model, HttpSession session){
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
 		return "noticia/buscar_formulario_noticia";
 	}
 	@RequestMapping("buscarNoticias")
-	public String buscarNoticias(String texto, Model model){
+	public String buscarNoticias(String texto, Model model, HttpSession session){
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
 		List<Noticia> noticias = nDAO.buscar(texto);
 		model.addAttribute("noticias", noticias);
 		return "noticia/listar_noticia";
@@ -166,7 +192,13 @@ public class NoticiaController {
 	}
 	
 	@RequestMapping("/verFavoritos")
-	public String verFavoritos(Long u, Model model){
+	public String verFavoritos(Long u, Model model, HttpSession session){
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
 		Usuario user = uDAO.recuperar(u);
 		List<Favorito> favoritos = this.fDAO.listar(user);
 		model.addAttribute("favoritos", favoritos);
@@ -175,7 +207,7 @@ public class NoticiaController {
 	}
 	
 	@RequestMapping("adicionarFavorito")
-	public String adicionarFavoritos(HttpServletRequest req){
+	public String adicionarFavoritos(HttpServletRequest req){	
 		Favorito favorito = new Favorito();
 		Usuario autor = uDAO.recuperar((long) Integer.parseInt(req.getParameter("usuario")));
 		Noticia noticia = nDAO.recuperar((long) Integer.parseInt(req.getParameter("noticia")));

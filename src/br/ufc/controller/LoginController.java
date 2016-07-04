@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ufc.dao.NoticiaDAO;
+import br.ufc.dao.NotificacaoDAO;
 import br.ufc.dao.SecaoDAO;
 import br.ufc.dao.UsuarioDAO;
 import br.ufc.dao.PapelDAO;
@@ -40,8 +41,18 @@ public class LoginController {
 	@Qualifier(value="secaoDAO")
 	private SecaoDAO sDAO;
 	
+	@Autowired
+	@Qualifier(value="notificacaoDAO")
+	private NotificacaoDAO ntDAO;
+	
 	@RequestMapping("/loginFormulario")
-	public String loginFormulario(){
+	public String loginFormulario(Model model, HttpSession session){
+		if(session.getAttribute("usuario_logado") != null){
+			Usuario usuario = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+			
+			Long notificacoes = this.ntDAO.novasNotificacoes(usuario.getId());
+			model.addAttribute("notificacoes", notificacoes);
+		}
 		return "login_formulario";
 	}
 	@RequestMapping("/home")
@@ -76,6 +87,12 @@ public class LoginController {
 				List<Noticia> noticias = this.nDAO.listar();
 				model.addAttribute("noticias", noticias);
 				
+				if(session.getAttribute("usuario_logado") != null){
+					Usuario usuariox = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+					
+					Long notificacoes = this.ntDAO.novasNotificacoes(usuariox.getId());
+					model.addAttribute("notificacoes", notificacoes);
+				}
 				return "menu";
 			}
 		}
@@ -83,6 +100,12 @@ public class LoginController {
 			if(session.getAttribute("usuario_logado") != null){
 				List<Noticia> noticias = this.nDAO.listar();
 				model.addAttribute("noticias", noticias);
+				if(session.getAttribute("usuario_logado") != null){
+					Usuario usuariox = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+					
+					Long notificacoes = this.ntDAO.novasNotificacoes(usuariox.getId());
+					model.addAttribute("notificacoes", notificacoes);
+				}
 				return "menu";
 			}
 			
@@ -107,6 +130,12 @@ public class LoginController {
 					List<Noticia> noticias = this.nDAO.listar();
 					model.addAttribute("noticias", noticias);
 					
+					if(session.getAttribute("usuario_logado") != null){
+						Usuario usuariox = uDAO.recuperar(((Usuario) session.getAttribute("usuario_logado")).getId());
+						
+						Long notificacoes = this.ntDAO.novasNotificacoes(usuariox.getId());
+						model.addAttribute("notificacoes", notificacoes);
+					}
 					return "menu";
 				}
 			}
