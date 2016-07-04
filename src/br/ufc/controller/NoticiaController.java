@@ -221,6 +221,6 @@ public class NoticiaController {
 	@RequestMapping("removerFavorito")
 	public String removerFavorito(Long id){
 		fDAO.apagar(id);
-		return "redirect:verFavoritos";
+		return "redirect:verFavoritos?u="+id;
 	}
 }

@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.ufc.dao.ComentarioDAO;
 import br.ufc.dao.NoticiaDAO;
+import br.ufc.dao.NotificacaoDAO;
 import br.ufc.dao.SecaoDAO;
 import br.ufc.dao.UsuarioDAO;
 import br.ufc.model.Comentario;
+import br.ufc.model.Favorito;
 import br.ufc.model.Noticia;
+import br.ufc.model.Notificacao;
 import br.ufc.model.Secao;
 import br.ufc.model.Usuario;
 import br.ufc.util.Emot;
@@ -44,6 +47,10 @@ public class ComentarioController {
 	@Qualifier(value="secaoDAO")
 	SecaoDAO sDAO;
 	
+	@Autowired
+	@Qualifier(value="notificacaoDAO")
+	private NotificacaoDAO ntDAO;
+	
 	
 	@RequestMapping("/inserirComentario")
 	public String inserirComentario(@Valid Comentario comentario, HttpServletRequest req,
@@ -63,6 +70,13 @@ public class ComentarioController {
 		comentario.setTexto(e.inserir(comentario.getTexto()));
 		
 		this.cDAO.inserir(comentario);
+		
+		Notificacao note;
+		
+		if(noticia.getAutor() != null){
+				note = new Notificacao(noticia.getAutor(), "Um comentario foi adicionado na <a href=listarComentarios?id="+noticia.getNoticiaId()+">noticia</a>!");
+				ntDAO.inserir(note);
+		}
 		
 		return "redirect:/listarComentarios?id="+noticia.getNoticiaId();
 	}

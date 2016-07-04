@@ -11,12 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.ufc.dao.UsuarioDAO;
 import br.ufc.model.Papel;
 import br.ufc.model.Usuario;
 
+
 public class DummyDB {
+	@Autowired
+	@Qualifier(value="usuarioDAO")
+	private UsuarioDAO uDAO;
 	
 	private int totalCountries;
 	private String data = "Afghanistan,	Albania, Zimbabwe, hutie, xut";
@@ -32,7 +37,7 @@ public class DummyDB {
 		news.add(new Usuario("r", "r", "Savio", p));
 		news.add(new Usuario("r", "r", "bambo", p));
 		
-		//news = uDAO.listar();
+		news = uDAO.listar();
 		for(Usuario u: news){
 			data += ", "+u.getNome();
 		}

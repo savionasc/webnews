@@ -46,7 +46,9 @@ public class InterceptadorGeral extends HandlerInterceptorAdapter {
 							|| URI.contains("adicionarFavorito") || URI.endsWith("listarClassificados")
 							|| URI.endsWith("inserirClassificadoFormulario") || URI.endsWith("listarNotificacoes")
 							|| URI.endsWith("buscarNoticias") || URI.contains("inserirComentario")
-							|| URI.contains("visualizarNotificacao") || URI.contains("apagarNotificacao"))
+							|| URI.contains("visualizarNotificacao") || URI.contains("apagarNotificacao")
+							|| URI.contains("removerFavorito") || URI.contains("fazerOfertaFormulario")
+							|| URI.contains("fazerOferta"))
 							&& papel.getPapel().equals("Leitor")){
 						return true;
 					}
@@ -60,7 +62,8 @@ public class InterceptadorGeral extends HandlerInterceptorAdapter {
 					if((URI.endsWith("inserirSecaoFormulario") || URI.endsWith("listarUsuario")
 							|| URI.endsWith("listarClassificadosInativos") || URI.endsWith("inserirPapelFormulario")
 							|| URI.endsWith("resultados") || URI.contains("apagarNoticia")
-							|| URI.contains("ativarClassificado") || URI.contains("apagarClassificado"))
+							|| URI.contains("ativarClassificado") || URI.contains("apagarClassificado") || URI.contains("alterarNoticiaFormulario")
+							|| URI.contains("alterarNoticia"))
 							&& papel.getPapel().equals("Editor")){
 						return true;
 					}
